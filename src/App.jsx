@@ -43,7 +43,7 @@ function App() {
         let allGenres = {};
 
         endPoints.forEach((url) => {
-            promises.push(fetchDataFromApi(`/genre/${url}/list?language=tr-TR`));
+            promises.push(fetchDataFromApi(`/genre/${url}/list`));
         });
 
         const data = await Promise.all(promises);

@@ -20,45 +20,48 @@ const HeroBanner = () => {
         setBackground(bg);
     }, [data]);
 
-
-    const searchQueryHandler = (event) => {
-        if (event.key === "Enter" && query.length > 0) {
+    const handleButtonClick = () => {
+        if (query.length > 0) {
             navigate(`/search/${query}`);
         }
     };
 
-  return (
-            <div className="heroBanner">
+    const searchQueryHandler = (event) => {
+        if (event.key === 'Enter') {
+            handleButtonClick();
+        }
+    };
+
+    return (
+        <div className="heroBanner">
             {!loading && (
                 <div className="backdrop-img">
                     <Img src={background} />
                 </div>
             )}
             
-                <div className="opacity-layer">
-                    
-                </div>
+            <div className="opacity-layer"></div>
 
             <ContentWrapper>
-            <div className="wrapper">
-                <div className="heroBannerContent">
-                    <span className="title">Merhaba.</span>
-                    <span className="subTitle">Milyonlarca film, dizi ve keşfedilecek kişi. Şimdi Sinema Perisi'de.</span>
-                    <div className="searchInput">
-                        <input 
-                        type="text" 
-                            placeholder="Film veya dizi Ara..."
-                            onChange={(e) => setQuery(e.target.value)}
-                            onKeyUp={searchQueryHandler}
-                        />
-                        <button>Ara</button>
+                <div className="wrapper">
+                    <div className="heroBannerContent">
+                        <span className="title">Merhaba.</span>
+                        <span className="subTitle">Milyonlarca film, dizi ve keşfedilecek kişi.</span>
+                        <div className="searchInput">
+                            <input 
+                                type="text" 
+                                placeholder="Film veya dizi Ara..."
+                                value={query}
+                                onChange={(e) => setQuery(e.target.value)}
+                                onKeyUp={searchQueryHandler}
+                            />
+                            <button onClick={handleButtonClick}>Ara</button>
+                        </div>
                     </div>
                 </div>
-            </div>
             </ContentWrapper>
         </div>
-        
-  );
+    );
 };
 
 export default HeroBanner;

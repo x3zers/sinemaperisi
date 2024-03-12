@@ -9,10 +9,12 @@ const Genres = ({ data }) => {
     return (
         <div className="genres">
             {data?.map((g) => {
-                if (!genres[g]?.name) return;
+                const genreName = genres[g]?.name;
+                if (!genreName) return null; // Kategori adı bulunamadıysa render etme
+                // Kategori adını Türkçe karşılığı ile göster
                 return (
                     <div key={g} className="genre">
-                        {genres[g]?.name}
+                        {genreName}
                     </div>
                 );
             })}

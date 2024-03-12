@@ -6,7 +6,7 @@ import useFetch from "../../../hooks/useFetch";
 const Similar = ({ mediaType, id }) => {
     const { data, loading, error } = useFetch(`/${mediaType}/${id}/similar`);
 
-    const title = mediaType === "tv" ? "Benzer Diziler" : "Benzer Filmler";
+    const title = mediaType === "tv" ? "Dikkat Çekici Diziler" : "Dikkat Çekici Filmler";
 
     return (
         <Carousel

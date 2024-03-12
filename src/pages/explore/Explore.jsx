@@ -34,11 +34,11 @@ const Explore = () => {
     const [sortby, setSortby] = useState(null);
     const { mediaType } = useParams();
 
-    const { data: genresData } = useFetch(`/genre/${mediaType}/list?language=tr`);
+    const { data: genresData } = useFetch(`/genre/${mediaType}/list`);
 
     const fetchInitialData = () => {
         setLoading(true);
-        fetchDataFromApi(`/discover/${mediaType}?language=tr`, filters).then((res) => {
+        fetchDataFromApi(`/discover/${mediaType}`, filters).then((res) => {
             setData(res);
             setPageNum((prev) => prev + 1);
             setLoading(false);
@@ -47,7 +47,7 @@ const Explore = () => {
 
     const fetchNextPageData = () => {
         fetchDataFromApi(
-            `/discover/${mediaType}?page=${pageNum}?language=tr`,
+            `/discover/${mediaType}?page=${pageNum}`,
             filters
         ).then((res) => {
             if (data?.results) {

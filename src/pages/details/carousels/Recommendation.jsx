@@ -4,13 +4,10 @@ import Carousel from "../../../components/carousel/Carousel";
 import useFetch from "../../../hooks/useFetch";
 
 const Recommendation = ({ mediaType, id }) => {
-    const { data, loading, error } = useFetch(
-        `/${mediaType}/${id}/recommendations?language=tr`
-    );
-
+    const { data, loading, error } = useFetch( `/${mediaType}/${id}/recommendations` );
     return (
         <Carousel
-            title="Editörün Tavsiyeleri"
+            title="Editörün Seçtikleri"
             data={data?.results}
             loading={loading}
             endpoint={mediaType}

@@ -78,13 +78,13 @@ const Header = () => {
     return (
         <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
             <ContentWrapper>
-                <div className="logo">
+                <div className="logo" onClick={() => navigationHandler("/")}>
                     <img src={logo} alt="" />
                 </div>       
                 <ul className="menuItems">
                 <li
                         className="menuItem"
-                        onClick={() => navigationHandler("http://localhost:5173/")}
+                        onClick={() => navigationHandler("/")}
                     >
                         Ana Sayfa
                     </li>
