@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
 
@@ -25,12 +26,12 @@ const DetailsBanner = ({ video, crew }) => {
 
     const _genres = data?.genres?.map((g) => g.id);
 
-    const director = crew?.filter((f) => f.job === "Yönetmen");
+    const director = crew?.filter((f) => f.job === "Director");
     const writer = crew?.filter(
         (f) =>
-            f.job === "Senaryo" ||
-            f.job === "Hikaye" ||
-            f.job === "Yazar"
+            f.job === "Screenplay" ||
+            f.job === "Story" ||
+            f.job === "Writer"
     );
 
     const toHoursAndMinutes = (totalMinutes) => {
@@ -38,6 +39,7 @@ const DetailsBanner = ({ video, crew }) => {
         const minutes = totalMinutes % 60;
         return `${hours} saat${minutes > 0 ? ` ${minutes} dakika` : ""}`;
     };
+
 
 
     return (
@@ -118,7 +120,7 @@ const DetailsBanner = ({ video, crew }) => {
                                             <span className="text">
                                                 {dayjs(
                                                     data.release_date
-                                                ).format("D MMMM YYYY")}
+                                                ).format("MMM D, YYYY")}
                                             </span>
                                         </div>
                                     )}
@@ -174,7 +176,7 @@ const DetailsBanner = ({ video, crew }) => {
                                 {data?.created_by?.length > 0 && (
                                     <div className="info">
                                         <span className="text bold">
-                                            Oluşturan:{" "}
+                                            Kurucu:{" "}
                                         </span>
                                         <span className="text">
                                             {data?.created_by?.map(
@@ -189,6 +191,23 @@ const DetailsBanner = ({ video, crew }) => {
                                                 )
                                             )}
                                         </span>
+                                    </div>
+                                )}
+
+                                {data?.videos?.results.length > 0 && (
+                                    <div className="info">
+                                        <span className="text bold">
+                                            Fragman:{" "}
+                                        </span>
+                                        <iframe
+                                            width="560"
+                                            height="315"
+                                            src={`https://www.youtube.com/embed/${data.videos.results[0].key}`}
+                                            title="YouTube video player"
+                                            frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen
+                                        ></iframe>
                                     </div>
                                 )}
                             </div>
