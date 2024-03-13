@@ -252,3 +252,19 @@
         }
     }
 }
+.tooltip {
+    display: none;
+    font-size: 12px;
+    color: rgb(255, 255, 255);
+    transition: opacity 0.8s;
+    position: absolute; 
+    padding: 10px; /* Daha fazla içerik alanı */
+    border-radius: 7px;
+    z-index: 1;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Hafif bir gölge efekti */
+    backdrop-filter: blur(10px); /* Bulanık arka plan efekti */
+}
+
+.playbtn:hover .tooltip {
+    display: block;
+}

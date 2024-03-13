@@ -41,7 +41,7 @@ const DetailsBanner = ({ video, crew }) => {
 
     const openWatchLink = () => {
         const contentName = data.name || data.title;
-        const searchUrl = `https://www.justwatch.com/tr/arama?q=${encodeURIComponent(contentName)}`;
+        const searchUrl = `https://www.hdfilmizle.site/?s=${encodeURIComponent(contentName)}`;
         window.open(searchUrl, "_blank");
     };
     return (
@@ -88,8 +88,10 @@ const DetailsBanner = ({ video, crew }) => {
                                         <PlayIcon />
                                         <span className="text">
                                             İzle
-                                        </span>
+                                            </span>
+                                            <span className="tooltip">Çıkan sonuçlarda ilk siteden içeriği izleyebilirsiniz.</span>
                                     </div>
+                                    
                                 </div>
 
                                 <div className="overview">
