@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
 
@@ -40,8 +39,11 @@ const DetailsBanner = ({ video, crew }) => {
         return `${hours} saat${minutes > 0 ? ` ${minutes} dakika` : ""}`;
     };
 
-
-
+    const openWatchLink = () => {
+        const contentName = data.name || data.title;
+        const searchUrl = `https://www.justwatch.com/tr/arama?q=${encodeURIComponent(contentName)}`;
+        window.open(searchUrl, "_blank");
+    };
     return (
         <div className="detailsBanner">
             {!loading && !!data && (
@@ -81,14 +83,11 @@ const DetailsBanner = ({ video, crew }) => {
                                     />
                                     <div
                                         className="playbtn"
-                                        onClick={() => {
-                                            setShow(true);
-                                            setVideoId(video.key);
-                                        }}
+                                        onClick={openWatchLink}
                                     >
                                         <PlayIcon />
                                         <span className="text">
-                                            Fragmanı İzle
+                                            İzle
                                         </span>
                                     </div>
                                 </div>
@@ -204,9 +203,9 @@ const DetailsBanner = ({ video, crew }) => {
                                             height="315"
                                             src={`https://www.youtube.com/embed/${data.videos.results[0].key}`}
                                             title="YouTube video player"
-                                            frameborder="0"
+                                            frameBorder="0"
                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowfullscreen
+                                            allowFullScreen
                                         ></iframe>
                                     </div>
                                 )}

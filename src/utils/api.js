@@ -7,26 +7,19 @@ const headers = {
     Authorization: "Bearer " + TMDB_TOKEN,
 };
 
-// API'den veri çekmek için genel bir fonksiyon
+
 export const fetchDataFromApi = async (endpoint, queryParams) => {
     try {
-        // Eğer queryParams yoksa boş bir nesne oluştur
+
         const params = queryParams ? { ...queryParams } : {};
-
-        // Dil parametresini Türkçe olarak ayarla
         params.language = "tr-TR";
-
-        // Axios isteği gönder
         const response = await axios.get(`${BASE_URL}${endpoint}`, {
             headers,
             params,
         });
 
-        // İstek başarılı olduysa veriyi döndür
         return response.data;
-    } catch (error) {
-        // Hata durumunda konsola hata yazdır ve null döndür
-        console.error("API Error:", error);
+        } catch (error) {
         return null;
     }
 };

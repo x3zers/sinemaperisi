@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import "./style.scss";
-
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 import VideoPopup from "../../../components/videoPopup/VideoPopup";
 import Img from "../../../components/lazyLoadImage/Img";
@@ -10,6 +8,28 @@ import { PlayIcon } from "../Playbtn";
 const VideosSection = ({ data, loading }) => {
     const [show, setShow] = useState(false);
     const [videoId, setVideoId] = useState(null);
+    const [videos, setVideos] = useState([]);
+
+    useEffect(() => {
+        const fetchVideos = async () => {
+            try {
+                const response = await fetch(
+                    `https://api.themoviedb.org/3/movie/${data.id}/videos?api_key=50b3c6dbb79aad9abebce47ea739e62d&language=tr-TR`
+                );
+                if (!response.ok) {
+                    throw new Error("Video verileri alınamadı");
+                }
+                const videoData = await response.json();
+                setVideos(videoData.results);
+            } catch (error) {
+                console.error("Bir hata oluştu:", error);
+            }
+        };
+
+        if (!loading && data && data.id) {
+            fetchVideos();
+        }
+    }, [data, loading]);
 
     const loadingSkeleton = () => {
         return (
@@ -24,12 +44,12 @@ const VideosSection = ({ data, loading }) => {
     return (
         <div className="videosSection">
             <ContentWrapper>
-                <div class="sectionHeading" title="Eğer Türkçe fragman bulunmadıysa oto resmi fragman görünecektir">
-                Resmi Fragmanlar
+                <div className="sectionHeading" title="Eğer Türkçe fragman bulunmadıysa oto resmi fragman görünecektir">
+                    Resmi Fragmanlar
                 </div>
                 {!loading ? (
                     <div className="videos">
-                        {data?.results?.map((video) => (
+                        {videos.map((video) => (
                             <div
                                 key={video.id}
                                 className="videoItem"
