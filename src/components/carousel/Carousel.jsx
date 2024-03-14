@@ -26,8 +26,8 @@ const Carousel = ({ data, loading, endpoint, title }) => {
 
         const scrollAmount =
             dir === "left"
-                ? container.scrollLeft - (container.offsetWidth + 20)
-                : container.scrollLeft + (container.offsetWidth + 20);
+                ? container.scrollLeft - (container.offsetWidth + 50)
+                : container.scrollLeft + (container.offsetWidth + 50);
 
         container.scrollTo({
             left: scrollAmount,
@@ -84,7 +84,7 @@ const Carousel = ({ data, loading, endpoint, title }) => {
                                         <Img src={posterUrl} />
                                         <CircleRating
                                             rating={item.vote_average.toFixed(
-                                                1
+                                                1.5
                                             )}
                                         />
                                         <Genres

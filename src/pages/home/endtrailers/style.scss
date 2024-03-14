@@ -1,0 +1,37 @@
+.carouselSection {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0px;
+
+    .actor-list {
+        display: flex;
+        flex-wrap: nowrap; /* Değişiklik: flex-wrap: nowrap; */
+        gap: 20px;
+        overflow-x: auto; /* Değişiklik: Yatay kaydırma ekleyin */
+        padding-bottom: 20px; /* Değişiklik: alt boşluk ekleyin */
+        -webkit-overflow-scrolling: touch; /* Değişiklik: iOS cihazlarında kaydırma düzgün çalışması için */
+        
+        .actor-card {
+            text-align: center;
+            flex: 0 0 calc(20% - 20px);
+            white-space: nowrap; /* Değişiklik: İçeriği bir satırda tutmak için */
+            margin-right: 20px; /* Değişiklik: Sağ boşluk ekleyin */
+            
+            img {
+                width: 100%;
+                height: auto;
+                border-radius: 15px;
+            }
+
+            p {
+                margin-top: 10px;
+            }
+        }
+
+        .show-more {
+            margin-top: 20px;
+            cursor: pointer;
+            color: blue;
+        }
+    }
+}

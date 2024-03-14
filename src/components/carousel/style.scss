@@ -3,6 +3,8 @@
     margin-bottom: 50px;
     .contentWrapper {
         position: relative;
+        overflow-x: auto; 
+        -webkit-overflow-scrolling: touch; 
     }
     .carouselTitle {
         font-size: 24px;
@@ -83,6 +85,8 @@
         margin-right: -20px;
         margin-left: -20px;
         padding: 0 20px;
+        overflow-x: auto; 
+        -webkit-overflow-scrolling: touch; 
         @include md {
             gap: 20px;
             overflow: hidden;
@@ -92,6 +96,8 @@
         .carouselItem {
             width: 125px;
             cursor: pointer;
+            overflow-x: auto; 
+            -webkit-overflow-scrolling: touch; 
             @include md {
                 width: calc(25% - 15px);
             }

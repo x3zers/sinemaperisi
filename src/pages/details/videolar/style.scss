@@ -100,9 +100,6 @@
         font-size: 0.8em; /* Küçük boyut için ayarlanabilir */
     }
     
-    .sectionHeading:hover::after {
-        opacity: 1; /* Hover olduğunda opaklık 1 olacak şekilde değiştirilir */
-    }
     .videoSkeleton {
         display: flex;
         gap: 10px;
@@ -140,4 +137,9 @@
             }
         }
     }
+}
+.noVideoMessage {
+    font-size: 20px;
+    color: #ffffff;
+    text-align: center;
 }

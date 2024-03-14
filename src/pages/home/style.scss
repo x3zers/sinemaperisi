@@ -6,6 +6,8 @@
         align-items: center;
         justify-content: space-between;
         margin-bottom: 20px;
+        overflow-x: auto; /* Değişiklik: Yatay kaydırma ekleyin */
+        -webkit-overflow-scrolling: touch; /* Değişiklik: iOS cihazlarında kaydırma düzgün çalışması için */
     }
     .carouselTitle {
         font-size: 24px;

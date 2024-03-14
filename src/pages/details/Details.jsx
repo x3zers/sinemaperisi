@@ -5,17 +5,18 @@ import "./style.scss";
 import useFetch from "../../hooks/useFetch";
 import DetailsBanner from "./detailsBanner/DetailsBanner";
 import Cast from "./cast/Cast";
-import VideosSection from "./videosSection/VideosSection";
+import Fragmanlar from "./fragmanlar/fragmanlar";
+import Videolar from "./videolar/videolar";
 import Similar from "./carousels/Similar";
 import Recommendation from "./carousels/Recommendation";
-import Kanallar from "./kanallar/kanal";
+import Resimler from "./resimler/Resimler";
 
 const Details = () => {
     const { mediaType, id } = useParams();
-    const { data: trVideos, loading: trVideosLoading } = useFetch(`/${mediaType}/${id}/videos?language=tr-TR`);
+    const { data: trVideos, loading: trVideosLoading } = useFetch(`/${mediaType}/${id}/videos`);
     const { data: enVideos, loading: enVideosLoading } = useFetch(`/${mediaType}/${id}/videos`);
 
-    const { data: trCredits, loading: trCreditsLoading } = useFetch(`/${mediaType}/${id}/credits?language=tr-TR`);
+    const { data: trCredits, loading: trCreditsLoading } = useFetch(`/${mediaType}/${id}/credits`);
     const { data: enCredits, loading: enCreditsLoading } = useFetch(`/${mediaType}/${id}/credits`);
 
     const videos = trVideos?.results.length > 0 ? trVideos : enVideos;
@@ -27,11 +28,11 @@ const Details = () => {
         <div>
             <DetailsBanner video={videos?.results?.[0]} crew={credits?.crew} />
             <Cast data={credits?.cast} loading={isLoading} />
-            <VideosSection data={videos} loading={isLoading} /> 
-           {/* <Kanallar data={videos} loading={isLoading} /> */}
+            <Videolar data={videos} loading={isLoading} /> 
+            <Fragmanlar data={videos} loading={isLoading} /> 
+            <Resimler data={videos} loading={isLoading} /> 
             <Recommendation mediaType={mediaType} id={id} />
             <Similar mediaType={mediaType} id={id} />
-            
         </div>
     );
 };

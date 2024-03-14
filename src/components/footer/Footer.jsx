@@ -25,6 +25,9 @@ const Footer = () => {
                 <div className="infoText">
                 Powered of ZERS.
                 </div>
+               <div className="dizifrag">Dizifrag'da Yabancı Dizi İzle
+                <link rel="stylesheet" href="https://dizifrag.org" />
+                </div>
                 <div className="socialIcons">
                     <span className="icon">
                         <FaFacebookF />

@@ -89,7 +89,7 @@ const DetailsBanner = ({ video, crew }) => {
                                         <span className="text">
                                             İzle
                                             </span>
-                                            <span className="tooltip">Çıkan sonuçlarda ilk siteden içeriği izleyebilirsiniz.</span>
+                                            <span className="tooltip">Çıkan sitede izlemek istediğiniz içeriği izleyebilirsiniz.</span>
                                     </div>
                                     
                                 </div>

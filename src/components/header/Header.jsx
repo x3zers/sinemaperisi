@@ -3,9 +3,9 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { SlMenu } from "react-icons/sl";
 import { VscChromeClose } from "react-icons/vsc";
 import { useNavigate, useLocation } from "react-router-dom";
+import { fetchDataFromApi } from "../../utils/api";
 
 import "./style.scss";
-
 import ContentWrapper from "../contentWrapper/ContentWrapper";
 import logo from "../../assets/s kopya.png";
 
@@ -61,50 +61,49 @@ const Header = () => {
         setShowSearch(false);
     };
 
-    const navigationHandler = (type) => {
-        switch (type) {
-            case "movie":
-                navigate("/explore/movie");
-                break;
-            case "tv":
-                navigate("/explore/tv");
-                break;
-            default:
-                navigate("/");
-                break;
+    const handleRandomClick = async () => {
+        try {
+            // Rastgele bir içerik türü seç
+            const contentType = Math.random() < 0.5 ? "movie" : "tv";
+            // Rastgele bir TMDB ID al
+            const randomId = Math.floor(Math.random() * 1000); // Burada gerçek bir id almalısınız
+            // İçeriğin detaylarını al
+            const response = await fetchDataFromApi(`/${contentType}/${randomId}`);
+            // İçeriğin puanını kontrol et
+            if (response.vote_average >= 5) {
+                // İçeriğin puanı 5 veya daha yüksekse, içeriğin sayfasına yönlendir
+                navigate(`/${contentType}/${randomId}`);
+            } else {
+                // İçeriğin puanı 5'ten düşükse, tekrar rastgele içerik seç
+                handleRandomClick();
+            }
+        } catch (error) {
+            console.error("Error fetching random content: ", error);
         }
     };
-    
+
     return (
         <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
             <ContentWrapper>
-                <div className="logo" onClick={() => navigationHandler("/")}>
-                    <img src={logo} alt="" />
+                <div className="logo" onClick={() => navigate("/")}>
+                    <img src={logo} alt="Logo" />
                 </div>       
                 <ul className="menuItems">
-                <li
-                        className="menuItem"
-                        onClick={() => navigationHandler("/")}
-                    >
+                    <li className="menuItem" onClick={() => navigate("/")}>
                         Ana Sayfa
                     </li>
-                    <li
-                        className="menuItem"
-                        onClick={() => navigationHandler("movie")}
-                    >
+                    <li className="menuItem" onClick={() => navigate("explore/movie")}>
                         Filmler
                     </li>
-                    <li
-                        className="menuItem"
-                        onClick={() => navigationHandler("tv")}
-                    >
+                    <li className="menuItem" onClick={() => navigate("explore/tv")}>
                         Diziler
                     </li>
-                    
+                    <li className="menuItem" onClick={handleRandomClick}>
+                        Rastgele
+                    </li>
                     <li className="menuItem">
                         <HiOutlineSearch onClick={openSearch} />
                     </li>
-                    
                 </ul>
 
                 <div className="mobileMenuItems">
@@ -126,9 +125,7 @@ const Header = () => {
                                 onChange={(e) => setQuery(e.target.value)}
                                 onKeyUp={searchQueryHandler}
                             />
-                            <VscChromeClose
-                                onClick={() => setShowSearch(false)}
-                            />
+                            <VscChromeClose onClick={() => setShowSearch(false)} />
                         </div>
                     </ContentWrapper>
                 </div>
