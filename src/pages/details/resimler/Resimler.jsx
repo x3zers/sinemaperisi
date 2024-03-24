@@ -15,6 +15,7 @@ const Resimler = ({ data, loading }) => {
     useEffect(() => {
         const fetchImages = async () => {
             try {
+                if (!data) return;
                 const mediaType = data.media_type === "movie" ? "movie" : "tv"; // İçeriğin medya türüne göre API endpoint'ini belirleme
                 const response = await fetch(
                     `https://api.themoviedb.org/3/${mediaType}/${data.id}/images?api_key=50b3c6dbb79aad9abebce47ea739e62d`
@@ -65,43 +66,41 @@ const Resimler = ({ data, loading }) => {
 
     return (
         <div className="resimlerSection">
-            <ContentWrapper>
-                <div className="sectionHeading">Resimler</div>
-                <div className="resimlerWrapper">
-                    {showLeftButton && (
-                        <div className="navigationButton left" onClick={() => handleScroll(-200)}>
-                            {"<"}
-                        </div>
-                    )}
-                    <div ref={resimlerRef} className="resimler">
-                        {!loading ? (
-                            images.length > 0 ? (
+            {images.length > 0 && ( // Resimler varsa resimler bölümünü göster
+                <ContentWrapper>
+                    <div className="sectionHeading">Resimler</div>
+                    <div className="resimlerWrapper">
+                        {showLeftButton && (
+                            <div className="navigationButton left" onClick={() => handleScroll(-200)}>
+                                {"<"}
+                            </div>
+                        )}
+                        <div ref={resimlerRef} className="resimler">
+                            {!loading ? (
                                 images.map((image, index) => (
                                     <div key={index} className="imageItem" onClick={() => enlargeImage(image)}>
                                         <Img
-                                            src={`https://image.tmdb.org/t/p/w500/${image.file_path}`}
+                                            src={`https://image.tmdb.org/t/p/original/${image.file_path}`}
                                             alt={image.file_path}
                                         />
                                     </div>
                                 ))
                             ) : (
-                                <div className="noImagesMessage">Resim bulunamadı.</div>
-                            )
-                        ) : (
-                            <div className="resimlerSkeleton">
-                                {loadingSkeleton()}
-                                {loadingSkeleton()}
-                                {loadingSkeleton()}
+                                <div className="resimlerSkeleton">
+                                    {loadingSkeleton()}
+                                    {loadingSkeleton()}
+                                    {loadingSkeleton()}
+                                </div>
+                            )}
+                        </div>
+                        {showRightButton && (
+                            <div className="navigationButton right" onClick={() => handleScroll(200)}>
+                                {">"}
                             </div>
                         )}
                     </div>
-                    {showRightButton && (
-                        <div className="navigationButton right" onClick={() => handleScroll(200)}>
-                            {">"}
-                        </div>
-                    )}
-                </div>
-            </ContentWrapper>
+                </ContentWrapper>
+            )}
             {selectedImage && (
                 <div className="enlargedImageView" onClick={closeImage}>
                     <img src={`https://image.tmdb.org/t/p/original/${selectedImage.file_path}`} alt={selectedImage.file_path} />

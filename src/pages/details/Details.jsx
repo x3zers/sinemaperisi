@@ -10,6 +10,7 @@ import Videolar from "./videolar/videolar";
 import Similar from "./carousels/Similar";
 import Recommendation from "./carousels/Recommendation";
 import Resimler from "./resimler/Resimler";
+import Justwatch from "./justwatch/justwatch"
 
 const Details = () => {
     const { mediaType, id } = useParams();
@@ -29,10 +30,11 @@ const Details = () => {
             <DetailsBanner video={videos?.results?.[0]} crew={credits?.crew} />
             <Cast data={credits?.cast} loading={isLoading} />
             <Videolar data={videos} loading={isLoading} /> 
-            <Fragmanlar data={videos} loading={isLoading} /> 
+            <Justwatch data={videos} loading={isLoading} /> 
             <Resimler data={videos} loading={isLoading} /> 
             <Recommendation mediaType={mediaType} id={id} />
             <Similar mediaType={mediaType} id={id} />
+            
         </div>
     );
 };

@@ -13,15 +13,32 @@ import Img from "../../../components/lazyLoadImage/Img.jsx";
 import PosterFallback from "../../../assets/not-found.png";
 import { PlayIcon } from "../Playbtn";
 import VideoPopup from "../../../components/videoPopup/VideoPopup";
+import logo from "../../../assets/analogo.png";
 
 const DetailsBanner = ({ video, crew }) => {
     const [show, setShow] = useState(false);
     const [videoId, setVideoId] = useState(null);
+    const [watchProviders, setWatchProviders] = useState(null);
 
     const { mediaType, id } = useParams();
     const { data, loading } = useFetch(`/${mediaType}/${id}`);
-
     const { url } = useSelector((state) => state.home);
+
+    useEffect(() => {
+        const fetchWatchProviders = async () => {
+            try {
+                const response = await fetch(`https://api.themoviedb.org/3/${mediaType}/${id}/watch/providers?api_key=50b3c6dbb79aad9abebce47ea739e62d`);
+                const data = await response.json();
+                setWatchProviders(data.results);
+            } catch (error) {
+                console.error("Error fetching watch providers:", error);
+            }
+        };
+
+        if (mediaType && id) {
+            fetchWatchProviders();
+        }
+    }, [mediaType, id]);
 
     const _genres = data?.genres?.map((g) => g.id);
 
@@ -43,6 +60,40 @@ const DetailsBanner = ({ video, crew }) => {
         const contentName = data.name || data.title;
         const searchUrl = `https://www.hdfilmizle.site/?s=${encodeURIComponent(contentName)}`;
         window.open(searchUrl, "_blank");
+    };
+
+    
+    const openLogoWatchLink = async () => {
+        try {
+            const tmdbId = data?.id;
+            const type = mediaType === "movie" ? 0 : 1;
+            const contentName = data.name || data.title;
+            const response = await fetch(`https://cdn.dizifrag.org/api/content/get/sef=${encodeURIComponent(contentName)}`, {
+            
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    tmdbId: tmdbId,
+                    type: type
+                })
+                
+            });
+
+            if (response.ok) {
+                const responseData = await response.json();
+                if (responseData && responseData.url) {
+                    window.open(responseData.url, "_blank");
+                } else {
+                    console.error("Error: Invalid response format");
+                }
+            } else {
+                console.error("Error:", response.statusText);
+            }
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
     };
     return (
         <div className="detailsBanner">
@@ -91,7 +142,15 @@ const DetailsBanner = ({ video, crew }) => {
                                             </span>
                                             <span className="tooltip">Çıkan sitede izlemek istediğiniz içeriği izleyebilirsiniz.</span>
                                     </div>
-                                    
+                                    <div
+                                        className="logoBtn"
+                                        onClick={openLogoWatchLink}
+                                    >
+                                        <img src={logo} alt="Logo" className="logo" />
+                                        <span className="text">
+                                            'da izle
+                                        </span>
+                                    </div>
                                 </div>
 
                                 <div className="overview">
@@ -104,6 +163,7 @@ const DetailsBanner = ({ video, crew }) => {
                                 <div className="info">
                                     {data.status && (
                                         <div className="infoItem">
+
                                             <span className="text bold">
                                                 Durum:{" "}
                                             </span>
@@ -194,7 +254,6 @@ const DetailsBanner = ({ video, crew }) => {
                                         </span>
                                     </div>
                                 )}
-
                                 {data?.videos?.results.length > 0 && (
                                     <div className="info">
                                         <span className="text bold">

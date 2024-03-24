@@ -268,3 +268,59 @@
 .playbtn:hover .tooltip {
     display: block;
 }
+.info {
+    // Diğer stiller...
+    .watchProviders {
+        margin-top: 20px;
+        font-size: 18px;
+        color: white;
+        .provider {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.2);
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.4);
+            }
+        }
+    }
+}
+
+
+.logoBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #131720; // Koyu mavi arka plan
+    border: none;
+    border-radius: 10px;
+    padding: 5px 5px;
+    margin-left: 10px; // İzle butonundan biraz uzaklık bırakmak için
+    cursor: pointer;
+    transition: background-color 0.3s; // Geçiş efekti
+
+    &:hover {
+        background-color: #131720; // Hover durumunda arka plan rengini değiştir
+    }
+
+    img.logo {
+        width: 85px; // Logo boyutu düzenlendi
+        height: auto;
+        margin-right: -10px; // Logodan yazıya olan mesafe
+        transition: transform 0.2s; // Hover efekti için geçiş efekti eklendi
+    }
+
+    .text {
+        color: white; // Yazı rengi
+        font-size: 16px; // Yazı boyutu
+    }
+
+    &:hover img.logo {
+        transform: scale(1.9); // Hover durumunda logo boyutunu büyüt
+    }
+
+    &:hover {
+        background-color: #131720; // Butona hover durumunda arka plan rengini değiştir
+    }
+}

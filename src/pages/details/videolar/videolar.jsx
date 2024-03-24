@@ -14,7 +14,7 @@ const VideosSection = ({ data, loading }) => {
     useEffect(() => {
         const fetchVideos = async () => {
             try {
-                const videoData = await fetchDataFromApi(`/movie/${data.id}/videos?language=en-US`);
+                const videoData = await fetchDataFromApi(`/movie/${data.id}/videos`);
                 setVideos(videoData.results);
             } catch (error) {
                 console.error("An error occurred:", error);
@@ -65,12 +65,7 @@ const VideosSection = ({ data, loading }) => {
                             ))}
                         </div>
                     ) : (
-                        <div className="videoSkeleton">
-                            {loadingSkeleton()}
-                            {loadingSkeleton()}
-                            {loadingSkeleton()}
-                            {loadingSkeleton()}
-                        </div>
+ <div className="noVideosMessage"></div> // Eğer videolar yoksa                       
                     )
                 ) : null}
             </ContentWrapper>

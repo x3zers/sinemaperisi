@@ -1,0 +1,41 @@
+.watchProviders {
+    .sectionHeading {
+        font-size: 1.5rem;
+        font-weight: arial;
+        margin-bottom: 10px;
+        color: white;
+    }
+
+    .providerList {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .provider {
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+        margin-bottom: 10px;
+        padding: 4px 10px;
+        border-radius: 10px;
+
+        &:hover {
+            background-color: #ff0000;
+        }
+
+        .logo {
+            width: 50px;
+            height: auto;
+            margin-right: 15px;
+        }
+
+        span {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        &.rent {
+            background-color: #ffffff;
+        }
+    }
+}
