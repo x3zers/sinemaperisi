@@ -98,27 +98,29 @@
             }
         }
     }
-}
-.arrow {
-    font-size: 40px;
-    color: rgb(255, 255, 255);
-    position: absolute;
-    top: 44%;
-    transform: translateY(-90%);
-    cursor: pointer;
-    opacity: 0.6;
-    z-index: 1;
-    display: none;
-    @include md {
-        display: block;
+
+    .scroll-arrow {
+        font-size: 40px;
+        color: rgb(255, 255, 255);
+        position: absolute;
+        top: 45%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        opacity: 0.6;
+        z-index: 1;
+        @include md {
+            display: block;
+        }
+        &:hover {
+            opacity: 1;
+        }
     }
-    &:hover {
-        opacity: 1;
+
+    .scroll-arrow.left {
+        left: 30px;
     }
-}
-.carouselLeftNav {
-    left: 350px;
-}
-.carouselRighttNav {
-    right: 5px;
+
+    .scroll-arrow.right {
+        right: 30px;
+    }
 }

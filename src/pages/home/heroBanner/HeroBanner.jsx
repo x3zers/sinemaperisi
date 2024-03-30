@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./style.scss";
+import logo from "../../../assets/analogo.png"; // logo doğrudan import ediliyor
 
 import useFetch from "../../../hooks/useFetch";
 
@@ -14,13 +15,17 @@ const HeroBanner = () => {
     const navigate = useNavigate();
     const { url } = useSelector((state) => state.home);
     const { data, loading } = useFetch("/movie/upcoming");
+    const [imageContent, setImageContent] = useState(""); 
 
     useEffect(() => {
-        const bg =
-            url.backdrop +
-            data?.results?.[Math.floor(Math.random() * 20)]?.backdrop_path;
-        setBackground(bg);
-    }, [data]);
+        if (data) {
+            const randomIndex = Math.floor(Math.random() * 20);
+            const selectedMovie = data?.results?.[randomIndex];
+            const bg = url.backdrop + selectedMovie?.backdrop_path;
+            setBackground(bg);
+            setImageContent(selectedMovie?.title);
+        }
+    }, [data, url]);
 
     const searchQueryHandler = (event) => {
         if (event.key === "Enter" && query.length > 0) {
@@ -30,7 +35,7 @@ const HeroBanner = () => {
 
     return (
         <div className="heroBanner">
-            {!loading && (
+            {data && ( 
                 <div className="backdrop-img">
                     <Img src={background} />
                 </div>
@@ -41,7 +46,7 @@ const HeroBanner = () => {
                 <div className="heroBannerContent">
                     <span className="title">Merhaba</span>
                     <span className="subTitle">
-                    Milyonlarca film, dizi ve kişi şimdi Sinemaperisi'nde
+                        Milyonlarca film, dizi ve kişi şimdi Sineperi'de
                     </span>
                     <div className="searchInput">
                         <input
@@ -50,9 +55,12 @@ const HeroBanner = () => {
                             onChange={(e) => setQuery(e.target.value)}
                             onKeyUp={searchQueryHandler}
                         />
-                    
+                    </div>
+                    <div>
+                        <span className="imageContent">Resimdeki içerik: {imageContent}</span>
                     </div>
                 </div>
+                <span className="imageContent2">Sineperi gücünü <img src={logo}/>'dan alıyor</span>
             </ContentWrapper>
         </div>
     );

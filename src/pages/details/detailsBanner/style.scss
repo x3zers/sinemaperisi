@@ -269,7 +269,6 @@
     display: block;
 }
 .info {
-    // Diğer stiller...
     .watchProviders {
         margin-top: 20px;
         font-size: 18px;
@@ -292,14 +291,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #131720; // Koyu mavi arka plan
+    background-color: #131720; 
     border: none;
     border-radius: 10px;
     padding: 5px 5px;
     margin-left: 10px; // İzle butonundan biraz uzaklık bırakmak için
     cursor: pointer;
     transition: background-color 0.3s; // Geçiş efekti
+    &:hover {
+        transform: scale(1.4); /* Hover olduğunda büyüklük artışı */
+    }
 
+    .logoBtn:hover .tooltip {
+        display: block;
+    }
+    
     &:hover {
         background-color: #131720; // Hover durumunda arka plan rengini değiştir
     }
@@ -317,10 +323,23 @@
     }
 
     &:hover img.logo {
-        transform: scale(1.9); // Hover durumunda logo boyutunu büyüt
+        transform: scale(1.4); // Hover durumunda logo boyutunu büyüt
     }
 
     &:hover {
         background-color: #131720; // Butona hover durumunda arka plan rengini değiştir
+    }
+}
+.butonDevamEt {
+    background-color: #007bff; /* Varsayılan renk */
+    color: #fff; /* Yazı rengi */
+    border: none; /* Kenarlık yok */
+    padding: 5px 10px; /* Buton içi boşluk */
+    border-radius: 4px; /* Köşeleri yuvarla */
+    cursor: pointer; /* Üzerine gelince imleç el işareti olsun */
+    transition: background-color 0.3s; /* Geçiş efekti */
+    
+    &:hover {
+        background-color: #0056b3; /* Üzerine gelince arkaplan rengi değişsin */
     }
 }

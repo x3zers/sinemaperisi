@@ -11,12 +11,13 @@ const Resimler = ({ data, loading }) => {
     const [showRightButton, setShowRightButton] = useState(false);
     const resimlerRef = useRef(null);
     const [selectedImage, setSelectedImage] = useState(null);
+    const [imageLoading, setImageLoading] = useState(true); 
 
     useEffect(() => {
         const fetchImages = async () => {
             try {
                 if (!data) return;
-                const mediaType = data.media_type === "movie" ? "movie" : "tv"; // İçeriğin medya türüne göre API endpoint'ini belirleme
+                const mediaType = data.media_type === "movie" ? "tv" : "tv"; // İçeriğin medya türüne göre API endpoint'ini belirleme
                 const response = await fetch(
                     `https://api.themoviedb.org/3/${mediaType}/${data.id}/images?api_key=50b3c6dbb79aad9abebce47ea739e62d`
                 );
@@ -29,7 +30,7 @@ const Resimler = ({ data, loading }) => {
                 console.error("Bir hata oluştu:", error);
             }
         };
-    
+
         if (!loading && data && data.id) {
             fetchImages();
         }
@@ -64,9 +65,14 @@ const Resimler = ({ data, loading }) => {
         setSelectedImage(null);
     };
 
+    // Resim yüklenme durumu işleyicileri
+    const handleImageLoad = () => {
+        setImageLoading(false);
+    };
+
     return (
         <div className="resimlerSection">
-            {images.length > 0 && ( // Resimler varsa resimler bölümünü göster
+            {images.length > 0 && (
                 <ContentWrapper>
                     <div className="sectionHeading">Resimler</div>
                     <div className="resimlerWrapper">
@@ -82,6 +88,8 @@ const Resimler = ({ data, loading }) => {
                                         <Img
                                             src={`https://image.tmdb.org/t/p/original/${image.file_path}`}
                                             alt={image.file_path}
+                                            onLoad={handleImageLoad} // Resim yüklendiğinde çağrılacak işlev
+                                            loading="lazy" // Resimleri gecikmeli yükleme
                                         />
                                     </div>
                                 ))

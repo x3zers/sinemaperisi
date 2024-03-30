@@ -18,7 +18,7 @@ import logo from "../../../assets/analogo.png";
 const DetailsBanner = ({ video, crew }) => {
     const [show, setShow] = useState(false);
     const [videoId, setVideoId] = useState(null);
-    const [watchProviders, setWatchProviders] = useState(null);
+    const [keywords, setKeywords] = useState(null);
 
     const { mediaType, id } = useParams();
     const { data, loading } = useFetch(`/${mediaType}/${id}`);
@@ -34,13 +34,32 @@ const DetailsBanner = ({ video, crew }) => {
                 console.error("Error fetching watch providers:", error);
             }
         };
-
+        const fetchKeywords = async () => {
+            try {
+                const response = await fetch(
+                    `https://api.themoviedb.org/3/${mediaType}/${id}/keywords?api_key=50b3c6dbb79aad9abebce47ea739e62d`
+                );
+                if (!response.ok) {
+                    throw new Error('Anahtar kelimeler alınamadı.');
+                }
+                const data = await response.json();
+                setKeywords(data.keywords);
+            } catch (error) {
+                console.error("Hata oluştu:", error);
+            }
+        };
+        
         if (mediaType && id) {
             fetchWatchProviders();
+            if (mediaType === "movie") {
+                fetchKeywords();
+            }
         }
     }, [mediaType, id]);
+    
 
     const _genres = data?.genres?.map((g) => g.id);
+    
 
     const director = crew?.filter((f) => f.job === "Director");
     const writer = crew?.filter(
@@ -62,14 +81,18 @@ const DetailsBanner = ({ video, crew }) => {
         window.open(searchUrl, "_blank");
     };
 
-    
+    const [showMore, setShowMore] = useState(5);
+
+    const handleShowMore = () => {
+    setShowMore(prevShowMore => prevShowMore + 5);
+    };
+
     const openLogoWatchLink = async () => {
         try {
             const tmdbId = data?.id;
             const type = mediaType === "movie" ? 0 : 1;
             const contentName = data.name || data.title;
             const response = await fetch(`https://cdn.dizifrag.org/api/content/get/sef=${encodeURIComponent(contentName)}`, {
-            
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -78,7 +101,6 @@ const DetailsBanner = ({ video, crew }) => {
                     tmdbId: tmdbId,
                     type: type
                 })
-                
             });
 
             if (response.ok) {
@@ -95,6 +117,28 @@ const DetailsBanner = ({ video, crew }) => {
             console.error("Error fetching data:", error);
         }
     };
+
+    const getStatusText = (status) => {
+        const movieStatus = {
+            'Released': 'Yayınlandı',
+            'Canceled': 'İptal Edildi',
+            'Post Production': 'Post Prodüksiyon',
+            'In Production': 'Üretiliyor',
+            'Planned': 'Planlandı',
+            'Rumored': 'Söylenti'
+        };
+
+        const seriesStatus = {
+            'In Production': 'Üretiliyor',
+            'Returning Series': 'Devam Eden Seri',
+            'Ended': 'Sona Erdi',
+            'Planned': 'Planlanıyor',
+            'Canceled': 'İptal Edildi'
+        };
+
+        return mediaType === "movie" ? movieStatus[status] : seriesStatus[status];
+    };
+
     return (
         <div className="detailsBanner">
             {!loading && !!data && (
@@ -163,16 +207,14 @@ const DetailsBanner = ({ video, crew }) => {
                                 <div className="info">
                                     {data.status && (
                                         <div className="infoItem">
-
                                             <span className="text bold">
                                                 Durum:{" "}
                                             </span>
                                             <span className="text">
-                                                {data.status}
+                                                {getStatusText(data.status)}
                                             </span>
                                         </div>
                                     )}
-
                                     {data.release_date && (
                                         <div className="infoItem">
                                             <span className="text bold">
@@ -199,7 +241,6 @@ const DetailsBanner = ({ video, crew }) => {
                                         </div>
                                     )}
                                 </div>
-
                                 {director?.length > 0 && (
                                     <div className="info">
                                         <span className="text bold">
@@ -216,7 +257,6 @@ const DetailsBanner = ({ video, crew }) => {
                                         </span>
                                     </div>
                                 )}
-
                                 {writer?.length > 0 && (
                                     <div className="info">
                                         <span className="text bold">
@@ -233,7 +273,7 @@ const DetailsBanner = ({ video, crew }) => {
                                         </span>
                                     </div>
                                 )}
-
+                            
                                 {data?.created_by?.length > 0 && (
                                     <div className="info">
                                         <span className="text bold">

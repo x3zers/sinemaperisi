@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     FaFacebookF,
     FaInstagram,
@@ -7,27 +7,31 @@ import {
 } from "react-icons/fa";
 
 import ContentWrapper from "../contentWrapper/ContentWrapper";
-
+import logo from "../../../src/assets/analogo.png"; 
 import "./style.scss";
 
 const Footer = () => {
+    const [popupContent, setPopupContent] = useState("");
+    const [showPopup, setShowPopup] = useState(false);
+
+    const handleMenuItemClick = (content) => {
+        setPopupContent(content);
+        setShowPopup(true);
+    };
+
+    const handleClosePopup = () => {
+        setShowPopup(false);
+    };
+
     return (
         <footer className="footer">
             <ContentWrapper>
                 <ul className="menuItems">
-                <li className="menuItem">Kullanım Koşulları</li>
-                <li className="menuItem">Gizlilik Politikası</li>
-                <li className="menuItem">Hakkımızda</li>
-                <li className="menuItem">Blog</li>
-                <li className="menuItem">SSS</li>
-
+                    <li className="menuItem" onClick={() => handleMenuItemClick("Bu, web sitesi kullanım koşullarıdır. Kullanıcıların siteyi ne amaçla kullandıklarını, hangi şartlar altında kullanabileceklerini ve hangi yasaklar olduğunu açıklar.")}>Kullanım Koşulları</li>
+                    <li className="menuItem" onClick={() => handleMenuItemClick("Bu, web sitesinin gizlilik politikasıdır. Site üzerindeki kullanıcıların kişisel verilerinin ne amaçla toplandığını, nasıl korunduğunu ve hangi koşullar altında üçüncü taraflarla paylaşıldığını belirler.")}>Gizlilik Politikası</li>
                 </ul>
-                <div className="infoText">
-                Powered of ZERS.
-                </div>
-               <div className="dizifrag">Dizifrag'da Yabancı Dizi İzle
-                <link rel="stylesheet" href="https://dizifrag.org" />
-                </div>
+                <span className="imageContentDf">Sineperi gücünü <img src={logo} alt="logo"/>dan alıyor</span>
+                <span className="imageContentZers">Zers Tarafından ☠️ ile geliştirildi.</span>
                 <div className="socialIcons">
                     <span className="icon">
                         <FaFacebookF />
@@ -43,6 +47,14 @@ const Footer = () => {
                     </span>
                 </div>
             </ContentWrapper>
+            {showPopup && (
+                <div className="popupOverlay">
+                    <div className="popupContent">
+                        <button className="closeButton" onClick={handleClosePopup}>X</button>
+                        <p>{popupContent}</p>
+                    </div>
+                </div>
+            )}
         </footer>
     );
 };

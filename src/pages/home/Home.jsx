@@ -6,8 +6,6 @@ import HeroBanner from "./heroBanner/HeroBanner";
 import Trending from "./trending/trending";
 import Popular from "./popular/Popular";
 import TopRated from "./topRated/TopRated";
-import Providers from "./providers/providers";
-import Endtrailers from "./endtrailers/Endtrailers"
 
 
 HeroBanner;
@@ -19,8 +17,6 @@ const Home = () => {
         <Trending />
         <Popular />
         <TopRated />
-       <Providers /> 
-       <Endtrailers />
         <div style={{ height: 1000 }}></div>
   </div>
   );

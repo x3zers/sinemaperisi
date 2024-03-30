@@ -1,14 +1,12 @@
-// Cast.jsx
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from "react-icons/bs";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 import "./style.scss";
 
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 import Img from "../../../components/lazyLoadImage/Img";
 import avatar from "../../../assets/avatar.png";
-
 
 const Cast = ({ data, loading }) => {
     const { url } = useSelector((state) => state.home);
@@ -37,23 +35,25 @@ const Cast = ({ data, loading }) => {
         setSelectedActor(data[index]);
     };
 
+    const scrollRight = () => {
+        document.getElementById('actorList').scrollLeft += 500; 
+    };
+    
+    const scrollLeft = () => {
+        document.getElementById('actorList').scrollLeft -= 500;
+    };
+
     return (
         <div className="castSection">
             <ContentWrapper>
                 <div className="sectionHeading">Oyuncular</div>
-                <div className="carouselNav">
-                    <BsFillArrowLeftCircleFill
-                        className="carouselLeftNav arrow"
-                        onClick={() => navigate("left")}
-                    />
-                    <BsFillArrowRightCircleFill
-                        className="carouselRightNav arrow"
-                        onClick={() => navigate("right")}
-                    />
+              
+                <div className="scroll-arrow left" onClick={scrollLeft}>
+                    <BsChevronLeft />
                 </div>
-                {!loading ? (
-                    <div className="listItems">
-                        {data?.map((item, index) => {
+                <div className="listItems" id="actorList">
+                    {!loading ? (
+                        data?.map((item, index) => {
                             const imgUrl = item.profile_path
                                 ? url.profile + item.profile_path
                                 : avatar.png;
@@ -68,18 +68,21 @@ const Cast = ({ data, loading }) => {
                                     </div>
                                 </div>
                             );
-                        })}
-                    </div>
-                ) : (
-                    <div className="castSkeleton">
-                        {skeleton()}
-                        {skeleton()}
-                        {skeleton()}
-                        {skeleton()}
-                        {skeleton()}
-                        {skeleton()}
-                    </div>
-                )}
+                        })
+                    ) : (
+                        <div className="castSkeleton">
+                            {skeleton()}
+                            {skeleton()}
+                            {skeleton()}
+                            {skeleton()}
+                            {skeleton()}
+                            {skeleton()}
+                        </div>
+                    )}
+                </div>
+                <div className="scroll-arrow right" onClick={scrollRight}>
+                    <BsChevronRight />
+                </div>
             </ContentWrapper>
             {selectedActor && <ActorDetails actor={selectedActor} />}
         </div>

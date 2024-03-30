@@ -7,19 +7,17 @@ const headers = {
     Authorization: "Bearer " + TMDB_TOKEN,
 };
 
-
-export const fetchDataFromApi = async (endpoint, queryParams) => {
+export const fetchDataFromApi = async (endpoint, queryParams, language = "tr-TR") => {
     try {
-
-        const params = queryParams ? { ...queryParams } : {};
-        params.language = "tr-TR";
+        const params = { ...queryParams, language };
         const response = await axios.get(`${BASE_URL}${endpoint}`, {
             headers,
             params,
         });
 
         return response.data;
-        } catch (error) {
+    } catch (error) {
+        console.error("Error fetching data from API:", error);
         return null;
     }
 };
