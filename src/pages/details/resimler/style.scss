@@ -77,6 +77,22 @@
                 }
             }
         }
+
+        .showMoreButton {
+            width: 100%;
+            padding: 10px;
+            background-color: #2c2c2c;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: #555;
+            }
+        }
     }
 
     .enlargedImageView {

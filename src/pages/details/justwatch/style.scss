@@ -1,42 +1,45 @@
-.watchProviders {
-    .sectionHeading {
-        font-size: 1.5rem;
-        font-weight: arial;
-        margin-bottom: 10px;
-        color: white;
-    }
-
-    .providerList {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .provider {
-        display: flex;
-        align-items: center;
-        margin-right: 20px;
-        margin-bottom: 10px;
-        padding: 4px 10px;
-        border-radius: 10px;
-
-        &:hover {
-            background-color: #ff0000;
+         .detailsPage {
+        .watchProviders {
+            .sectionHeading {
+                font-size: 1.5rem;
+                font-weight: arial;
+                margin-bottom: 10px;
+                color: white;
+            }
+        
+      
+          .error {
+            color: red;
+            margin-bottom: 1rem;
+          }
+      
+          .providerList {
+            display: flex;
+            flex-wrap: wrap;
+      
+            .provider {
+              border: none;
+              background-color: transparent;
+              margin-right: 1rem;
+              margin-bottom: 1rem;
+              transition: transform 0.2s ease-in-out;
+      
+              .logo {
+                width: 100px;
+                height: auto;
+                transition: transform 0.2s ease-in-out;
+                border-radius: 15px;
+              }
+      
+              &:hover {
+                transform: scale(1.1);
+      
+                .logo {
+                  scale: 15px;
+                }
+              }
+            }
+          }
         }
-
-        .logo {
-            width: 50px;
-            height: auto;
-            margin-right: 5px;
-        }
-
-        span {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: rgb(0, 0, 0);
-        }
-
-        &.rent {
-            background-color: #ffffff;
-        }
-    }
-}
+      }
+      

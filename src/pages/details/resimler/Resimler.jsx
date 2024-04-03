@@ -6,20 +6,21 @@ import logo from "../../../assets/s kopya.png";
 
 const Resimler = ({ data, loading }) => {
     const [images, setImages] = useState([]);
+    const [visibleImages, setVisibleImages] = useState(1); // Görünür resim sayısı
     const [scrollLeft, setScrollLeft] = useState(0);
     const [showLeftButton, setShowLeftButton] = useState(false);
     const [showRightButton, setShowRightButton] = useState(false);
     const resimlerRef = useRef(null);
     const [selectedImage, setSelectedImage] = useState(null);
-    const [imageLoading, setImageLoading] = useState(true); 
+    const [imageLoading, setImageLoading] = useState(true);
 
     useEffect(() => {
         const fetchImages = async () => {
             try {
                 if (!data) return;
-                const mediaType = data.media_type === "movie" ? "tv" : "tv"; // İçeriğin medya türüne göre API endpoint'ini belirleme
+                const mediaType = data.media_type === "movie" ? "movie" : "tv"; // İçeriğin medya türüne göre API endpoint'ini belirleme
                 const response = await fetch(
-                    `https://api.themoviedb.org/3/${mediaType}/${data.id}/images?api_key=50b3c6dbb79aad9abebce47ea739e62d`
+                    `https://api.themoviedb.org/3/movie/${data.id}/images?api_key=50b3c6dbb79aad9abebce47ea739e62d`
                 );
                 if (!response.ok) {
                     throw new Error("Resimler alınamadı.");
@@ -31,10 +32,9 @@ const Resimler = ({ data, loading }) => {
             }
         };
 
-        if (!loading && data && data.id) {
-            fetchImages();
-        }
-    }, [data, loading]);
+        fetchImages(); 
+
+    }, [data]);
 
     useEffect(() => {
         if (resimlerRef.current) {
@@ -65,9 +65,13 @@ const Resimler = ({ data, loading }) => {
         setSelectedImage(null);
     };
 
-    // Resim yüklenme durumu işleyicileri
     const handleImageLoad = () => {
         setImageLoading(false);
+    };
+
+    // Daha fazla resim gösterme işlevi
+    const showMoreImages = () => {
+        setVisibleImages((prevVisibleImages) => prevVisibleImages + 1);
     };
 
     return (
@@ -83,13 +87,13 @@ const Resimler = ({ data, loading }) => {
                         )}
                         <div ref={resimlerRef} className="resimler">
                             {!loading ? (
-                                images.map((image, index) => (
+                                images.slice(0, visibleImages).map((image, index) => (
                                     <div key={index} className="imageItem" onClick={() => enlargeImage(image)}>
                                         <Img
                                             src={`https://image.tmdb.org/t/p/original/${image.file_path}`}
                                             alt={image.file_path}
-                                            onLoad={handleImageLoad} // Resim yüklendiğinde çağrılacak işlev
-                                            loading="lazy" // Resimleri gecikmeli yükleme
+                                            onLoad={handleImageLoad}
+                                            loading="lazy"
                                         />
                                     </div>
                                 ))
@@ -105,6 +109,11 @@ const Resimler = ({ data, loading }) => {
                             <div className="navigationButton right" onClick={() => handleScroll(200)}>
                                 {">"}
                             </div>
+                        )}
+                        {images.length > visibleImages && (
+                            <button className="showMoreButton" onClick={showMoreImages}>
+                                Daha Fazla Göster
+                            </button>
                         )}
                     </div>
                 </ContentWrapper>

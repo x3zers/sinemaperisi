@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./style.scss";
-import logo from "../../../assets/analogo.png"; 
+import logo from "../../../assets/analogo.png";
 
 import useFetch from "../../../hooks/useFetch";
 
@@ -14,8 +14,8 @@ const HeroBanner = () => {
     const [query, setQuery] = useState("");
     const navigate = useNavigate();
     const { url } = useSelector((state) => state.home);
-    const { data, loading } = useFetch("/movie/upcoming");
-    const [imageContent, setImageContent] = useState(""); 
+    const { data } = useFetch("/movie/upcoming");
+    const [imageContent, setImageContent] = useState("");
 
     useEffect(() => {
         if (data) {
@@ -23,9 +23,15 @@ const HeroBanner = () => {
             const selectedMovie = data?.results?.[randomIndex];
             const bg = url.backdrop + selectedMovie?.backdrop_path;
             setBackground(bg);
-            setImageContent(selectedMovie?.title);
+            setImageContent(selectedMovie);
         }
     }, [data, url]);
+
+    const handleImageClick = () => {
+        if (imageContent) {
+            navigate(`/movie/${imageContent.id}`);
+        }
+    };
 
     const searchQueryHandler = (event) => {
         if (event.key === "Enter" && query.length > 0) {
@@ -35,9 +41,9 @@ const HeroBanner = () => {
 
     return (
         <div className="heroBanner">
-            {data && ( 
+            {data && (
                 <div className="backdrop-img">
-                    <Img src={background} />
+                    <Img src={background} onClick={handleImageClick} />
                 </div>
             )}
 
@@ -57,10 +63,12 @@ const HeroBanner = () => {
                         />
                     </div>
                     <div>
-                        <span className="imageContent">Resimdeki içerik: {imageContent}</span>
+                        <span className="imageContent" onClick={handleImageClick}>
+                            Resimdeki içerik: {imageContent?.title}
+                        </span>
                     </div>
                 </div>
-                <span className="imageContent2">Sineperi gücünü <img src={logo}/>'dan alıyor</span>
+                <span className="imageContent2">Sineperi gücünü <img src={logo} alt="logo"/>'dan alıyor</span>
             </ContentWrapper>
         </div>
     );

@@ -8,9 +8,21 @@ const DetailsPage = () => {
     const [watchProviders, setWatchProviders] = useState(null);
     const [error, setError] = useState(null);
 
+    const determineMediaType = () => {
+        // mediaType parametresine göre içeriğin türünü belirle
+        if (mediaType === "movie") {
+            return "movie";
+        } else if (mediaType === "tv") {
+            return "tv";
+        }
+        // Varsayılan olarak film olarak dön
+        return "movie";
+    };
+
     useEffect(() => {
         const fetchWatchProviders = async () => {
             try {
+                const mediaType = determineMediaType();
                 const response = await fetch(`https://api.themoviedb.org/3/${mediaType}/${id}/watch/providers?api_key=50b3c6dbb79aad9abebce47ea739e62d`);
                 if (!response.ok) {
                     throw new Error("Watch providers could not be fetched.");
@@ -27,10 +39,6 @@ const DetailsPage = () => {
             fetchWatchProviders();
         }
     }, [mediaType, id]);
-
-    const handleClick = (link) => {
-        window.open(link, "_blank"); // Linki yeni bir sekmede aç
-    };
 
     return (
         <div className="detailsPage">
@@ -52,10 +60,9 @@ const DetailsPage = () => {
                                     >
                                         <img
                                             src={`https://www.themoviedb.org/t/p/original${provider.logo_path}`}
-                                            alt={`${provider.provider_name} - İzle`} // "İzle" yazısını ekledik
                                             className="logo"
+                                            alt={provider.provider_name}
                                         />
-                                        <span>{provider.provider_name}</span>
                                     </button>
                                 ))}
                             </div>
