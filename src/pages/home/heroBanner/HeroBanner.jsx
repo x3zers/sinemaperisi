@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./style.scss";
-import logo from "../../../assets/analogo.png"; // logo doğrudan import ediliyor
+import logo from "../../../assets/analogo.png"; 
 
 import useFetch from "../../../hooks/useFetch";
 

@@ -33,7 +33,7 @@ const Footer = () => {
                 <span className="imageContentDf">Sineperi gücünü <img src={logo} alt="logo"/>dan alıyor</span>
                 <span className="imageContentZers">Zers Tarafından ☠️ ile geliştirildi.</span>
                 <div className="socialIcons">
-                    <span className="icon">
+                    <span className="icon"> 
                         <FaFacebookF />
                     </span>
                     <span className="icon">
