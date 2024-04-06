@@ -128,13 +128,13 @@
             filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5));
         
             @media (max-width: 768px) {
-                bottom: 34rem;
+                bottom: 32rem;
                 left: 7%;
                 width: 80px; // Mobil görünümde logonun genişliğini küçült
                 filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.3)); // Mobil görünümde gölge efektini azalt
             }
             @media (max-width: 1445px) {
-                bottom: 34rem;
+                bottom: 30rem;
                 left: 7%;
                 width: 80px; // Mobil görünümde logonun genişliğini küçült
                 filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.3)); // Mobil görünümde gölge efektini azalt

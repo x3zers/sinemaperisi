@@ -3,9 +3,12 @@ import React from 'react';
 import "./style.scss";
 
 import HeroBanner from "./heroBanner/HeroBanner";
-import Trending from "./trending/trending";
+import TrendFilmler from "./trendFilmler/trendfilmler";
 import Popular from "./popular/Popular";
 import TopRated from "./topRated/TopRated";
+import TrendDiziler from "./trendDiziler/trenddiziler";
+import Yakinda from "./yakinda/yakindagelecekler";
+import Airingtoday from "./airingtoday/today"
 
 
 HeroBanner;
@@ -14,9 +17,12 @@ const Home = () => {
   return (
      <div className="homePage">
         <HeroBanner />
-        <Trending />
+        <TrendFilmler />
+        <TrendDiziler />
         <Popular />
         <TopRated />
+        <Yakinda />
+        <Airingtoday />
         <div style={{ height: 1000 }}></div>
   </div>
   );

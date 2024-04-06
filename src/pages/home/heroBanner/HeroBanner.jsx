@@ -62,13 +62,15 @@ const HeroBanner = () => {
                             onKeyUp={searchQueryHandler}
                         />
                     </div>
-                    <div>
+                    <div>   
                         <span className="imageContent" onClick={handleImageClick}>
                             Resimdeki içerik: {imageContent?.title}
                         </span>
                     </div>
                 </div>
-                <span className="imageContent2">Sineperi gücünü <img src={logo} alt="logo"/>'dan alıyor</span>
+                <span className="imageContent2" onClick={() => window.open('https://dizifrag.org')}>
+                Sineperi gücünü <img src={logo} alt="logo"/>'dan alıyor
+                </span>
             </ContentWrapper>
         </div>
     );

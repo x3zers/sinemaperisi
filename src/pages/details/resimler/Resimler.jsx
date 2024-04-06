@@ -6,7 +6,7 @@ import logo from "../../../assets/s kopya.png";
 
 const Resimler = ({ data, loading }) => {
     const [images, setImages] = useState([]);
-    const [visibleImages, setVisibleImages] = useState(1); // Görünür resim sayısı
+    const [visibleImages, setVisibleImages] = useState(5); // Görünür resim sayısı
     const [scrollLeft, setScrollLeft] = useState(0);
     const [showLeftButton, setShowLeftButton] = useState(false);
     const [showRightButton, setShowRightButton] = useState(false);
@@ -69,11 +69,6 @@ const Resimler = ({ data, loading }) => {
         setImageLoading(false);
     };
 
-    // Daha fazla resim gösterme işlevi
-    const showMoreImages = () => {
-        setVisibleImages((prevVisibleImages) => prevVisibleImages + 1);
-    };
-
     return (
         <div className="resimlerSection">
             {images.length > 0 && (
@@ -102,6 +97,8 @@ const Resimler = ({ data, loading }) => {
                                     {loadingSkeleton()}
                                     {loadingSkeleton()}
                                     {loadingSkeleton()}
+                                    {loadingSkeleton()}
+                                    {loadingSkeleton()}
                                 </div>
                             )}
                         </div>
@@ -109,11 +106,6 @@ const Resimler = ({ data, loading }) => {
                             <div className="navigationButton right" onClick={() => handleScroll(200)}>
                                 {">"}
                             </div>
-                        )}
-                        {images.length > visibleImages && (
-                            <button className="showMoreButton" onClick={showMoreImages}>
-                                Daha Fazla Göster
-                            </button>
                         )}
                     </div>
                 </ContentWrapper>

@@ -126,6 +126,7 @@
     border-radius: 5px;
     bottom: -50px;
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+    cursor: pointer;
     
 }
 .imageContent2 {
@@ -140,6 +141,7 @@
     padding: 8px 12px;
     border-radius: 5px;
     bottom: -50px;
+    cursor: pointer;
     img {
         max-width: 55px;
         max-height: 24px;
@@ -148,14 +150,14 @@
 
 
     @media screen and (max-width: 769px) {
-        display: none; // Sadece 769 piksel ve üstü ekranlarda görünsün
+        display: none;
     }
 }
     
 
 .imageContent2 {
     bottom: 90px;
-
+    cursor: pointer;
     img {
         max-width: 150px;
         max-height: 150px;
