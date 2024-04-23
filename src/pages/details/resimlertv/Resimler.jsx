@@ -6,6 +6,7 @@ import logo from "../../../assets/s kopya.png";
 
 const Resimler = ({ data, loading }) => {
     const [images, setImages] = useState([]);
+    const [visibleImages, setVisibleImages] = useState(9); // Görünür resim sayısı
     const [scrollLeft, setScrollLeft] = useState(0);
     const [showLeftButton, setShowLeftButton] = useState(false);
     const [showRightButton, setShowRightButton] = useState(false);
