@@ -56,7 +56,7 @@
 
                 img {
                     width: 200px;
-                    height: 120px;
+                    height: 150px;
                     object-fit: cover;
                     border-radius: 8px;
                     transition: transform 0.3s ease;
@@ -115,9 +115,7 @@
             object-fit: contain;
             transition: transform 0.3s ease;
         }
-        .noImagesMessage{
-            color: white;
-        }
+
         .logo {
             position: absolute;
             bottom: 50rem;

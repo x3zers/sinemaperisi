@@ -18,47 +18,28 @@ import logo from "../../../assets/analogo.png";
 const DetailsBanner = ({ video, crew }) => {
     const [show, setShow] = useState(false);
     const [videoId, setVideoId] = useState(null);
-    const [keywords, setKeywords] = useState(null);
+    const [autoRotate, setAutoRotate] = useState(false); // Otomatik dönüş özelliği
 
     const { mediaType, id } = useParams();
     const { data, loading } = useFetch(`/${mediaType}/${id}`);
     const { url } = useSelector((state) => state.home);
-
-    useEffect(() => {
-        const fetchWatchProviders = async () => {
-            try {
-                const response = await fetch(`https://api.themoviedb.org/3/${mediaType}/${id}/watch/providers?api_key=50b3c6dbb79aad9abebce47ea739e62d`);
-                const data = await response.json();
-                setWatchProviders(data.results);
-            } catch (error) {
-                console.error("Error fetching watch providers:", error);
-            }
-        };
-        const fetchKeywords = async () => {
-            try {
-                const response = await fetch(
-                    `https://api.themoviedb.org/3/${mediaType}/${id}/keywords?api_key=50b3c6dbb79aad9abebce47ea739e62d`
-                );
-                if (!response.ok) {
-                    throw new Error('Anahtar kelimeler alınamadı.');
-                }
-                const data = await response.json();
-                setKeywords(data.keywords);
-            } catch (error) {
-                console.error("Hata oluştu:", error);
-            }
-        };
-        
-        if (mediaType && id) {
-            fetchWatchProviders();
-            if (mediaType === "movie") {
-                fetchKeywords();
-            }
-        }
-    }, [mediaType, id]);
-    
+    const [mediaIndex, setMediaIndex] = useState(0); // Medya indeksi (afiş veya backdrop için)
 
     const _genres = data?.genres?.map((g) => g.id);
+
+    useEffect(() => {
+        // Otomatik dönüş özelliği varsa, arka plan ve afişi değiştir
+        if (autoRotate) {
+            const intervalId = setInterval(() => {
+                setMediaIndex((prevIndex) => (prevIndex + 1) % data.backdrops.length);
+            }, 2000); // 2 saniyede bir değiştir
+            return () => clearInterval(intervalId);
+        }
+    }, [autoRotate, data]); // Otomatik dönüş veya data değiştiğinde efekti yeniden oluştur
+
+    const toggleAutoRotate = () => {
+        setAutoRotate(!autoRotate);
+    };
     
 
     const director = crew?.filter((f) => f.job === "Director");
@@ -77,14 +58,8 @@ const DetailsBanner = ({ video, crew }) => {
 
     const openWatchLink = () => {
         const contentName = data.name || data.title;
-        const searchUrl = `https://www.hdfilmizle.site/?s=${encodeURIComponent(contentName)}`;
+        const searchUrl = `https://www.netflix.com/search?q=${encodeURIComponent(contentName)}`;
         window.open(searchUrl, "_blank");
-    };
-
-    const [showMore, setShowMore] = useState(5);
-
-    const handleShowMore = () => {
-    setShowMore(prevShowMore => prevShowMore + 5);
     };
 
     const openLogoWatchLink = async () => {
@@ -223,7 +198,7 @@ const DetailsBanner = ({ video, crew }) => {
                                             <span className="text">
                                                 {dayjs(
                                                     data.release_date
-                                                ).format("MMM D, YYYY")}
+                                                ).format("D MMMM YYYY")}
                                             </span>
                                         </div>
                                     )}

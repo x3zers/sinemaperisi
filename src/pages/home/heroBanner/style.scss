@@ -72,9 +72,8 @@
         .searchInput {
             display: flex;
             align-items: center;
-            justify-content: center; /* İçeriği yatayda ve dikeyde merkezlemek için */
+            justify-content: center; 
             width: 100%;
-            position: relative; /* Animasyonlu efekt için */
         
             input {
                 height: 50px;
@@ -86,7 +85,6 @@
                 border-radius: 15px;
                 padding: 0 15px;
                 font-size: 14px;
-                transition: width 0.3s ease; /* Geçiş efekti eklemek için */
         
                 @media (min-width: -768px) {
                     width: calc(100% - 50px);

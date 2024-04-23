@@ -5,16 +5,14 @@ import dayjs from "dayjs";
 import "./style.scss";
 
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper.jsx";
-import useFetch from "../../../hooks/useFetch.jsx";
 import Img from "../../../components/lazyLoadImage/Img.jsx";
 import PosterFallback from "../../../assets/not-found.png";
 import VideoPopup from "../../../components/videoPopup/VideoPopup.jsx";
-import logo from "../../../assets/analogo.png";
 
 const ActorDetails = () => {
     const history = useHistory();
     const { id } = useParams();
-    const { data, loading } = useFetch(`/person/3878062`);
+    const [actorData, setActorData] = useState(null);
     const [movies, setMovies] = useState([]);
     const [biography, setBiography] = useState("");
     const [images, setImages] = useState([]);
@@ -24,15 +22,17 @@ const ActorDetails = () => {
     useEffect(() => {
         const fetchActorDetails = async () => {
             try {
-                const moviesResponse = await fetch(`https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=50b3c6dbb79aad9abebce47ea739e62d`);
+                const actorResponse = await fetch(`https://api.themoviedb.org/3/person/${id}?api_key=YOUR_API_KEY&language=en-US`);
+                const actorData = await actorResponse.json();
+                setActorData(actorData);
+
+                const moviesResponse = await fetch(`https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=YOUR_API_KEY`);
                 const moviesData = await moviesResponse.json();
                 setMovies(moviesData.cast);
 
-                const biographyResponse = await fetch(`https://api.themoviedb.org/3/person/${id}?api_key=50b3c6dbb79aad9abebce47ea739e62d&language=en-US`);
-                const biographyData = await biographyResponse.json();
-                setBiography(biographyData.biography);
+                setBiography(actorData.biography);
 
-                const imagesResponse = await fetch(`https://api.themoviedb.org/3/person/${id}/images?api_key=50b3c6dbb79aad9abebce47ea739e62d`);
+                const imagesResponse = await fetch(`https://api.themoviedb.org/3/person/${id}/images?api_key=YOUR_API_KEY`);
                 const imagesData = await imagesResponse.json();
                 setImages(imagesData.profiles);
             } catch (error) {
@@ -46,21 +46,22 @@ const ActorDetails = () => {
     }, [id]);
 
     const handleImageClick = () => {
-        if (data.profile_path) {
-            history.push(`https://www.themoviedb.org/person/${id}-${data.name}`);
+        if (actorData && actorData.homepage) {
+            window.open(actorData.homepage, "_blank");
         }
     };
 
     return (
         <div className="actorDetails">
-            {!loading && !!data && (
+            {!actorData && <div>Loading...</div>}
+            {actorData && (
                 <ContentWrapper>
                     <div className="content">
                         <div className="left" onClick={handleImageClick}>
-                            {data.profile_path ? (
+                            {actorData.profile_path ? (
                                 <Img
                                     className="profileImg"
-                                    src={`https://image.tmdb.org/t/p/original/${data.profile_path}`}
+                                    src={`https://image.tmdb.org/t/p/original/${actorData.profile_path}`}
                                 />
                             ) : (
                                 <Img
@@ -71,13 +72,13 @@ const ActorDetails = () => {
                         </div>
                         <div className="right">
                             <div className="title">
-                                {data.name}
+                                {actorData.name}
                             </div>
                             <div className="subtitle">
-                                Doğum Tarihi: {dayjs(data.birthday).format("YYYY-MM-DD")}
+                                Doğum Tarihi: {dayjs(actorData.birthday).format("YYYY-MM-DD")}
                             </div>
                             <div className="subtitle">
-                                Doğum Yeri: {data.place_of_birth}
+                                Doğum Yeri: {actorData.place_of_birth}
                             </div>
                             <div className="biography">
                                 <div className="heading">Biyografi</div>

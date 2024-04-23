@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import "./style.scss";
 
@@ -10,16 +10,6 @@ import { PlayIcon } from "../Playbtn";
 const VideosSection = ({ data, loading }) => {
     const [show, setShow] = useState(false);
     const [videoId, setVideoId] = useState(null);
-    const [englishVideos, setEnglishVideos] = useState([]);
-
-    useEffect(() => {
-        if (!loading && data?.results) {
-            const englishVideos = data.results.filter(
-                (video) => video.iso_639_1 === "tr"
-            );
-            setEnglishVideos(englishVideos);
-        }
-    }, [loading, data]);
 
     const loadingSkeleton = () => {
         return (
@@ -31,22 +21,20 @@ const VideosSection = ({ data, loading }) => {
         );
     };
 
-    const handleVideoClick = (video) => {
-        setVideoId(video.key);
-        setShow(true);
-    };
-
     return (
         <div className="videosSection">
             <ContentWrapper>
-                <div className="sectionHeading">Official Videos</div>
+                <div className="sectionHeading">Resmi Videolar</div>
                 {!loading ? (
                     <div className="videos">
-                        {englishVideos.map((video) => (
+                        {data?.results?.map((video) => (
                             <div
                                 key={video.id}
                                 className="videoItem"
-                                onClick={() => handleVideoClick(video)}
+                                onClick={() => {
+                                    setVideoId(video.key);
+                                    setShow(true);
+                                }}
                             >
                                 <div className="videoThumbnail">
                                     <Img

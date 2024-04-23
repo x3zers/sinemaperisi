@@ -66,15 +66,13 @@ const Header = () => {
             // Rastgele bir içerik türü seç
             const contentType = Math.random() < 0.5 ? "movie" : "tv";
             // Rastgele bir TMDB ID al
-            const randomId = Math.floor(Math.random() * 1000); // Burada gerçek bir id almalısınız
+            const randomId = Math.floor(Math.random() * 500); // Burada gerçek bir id almalısınız
             // İçeriğin detaylarını al
             const response = await fetchDataFromApi(`/${contentType}/${randomId}`);
             // İçeriğin puanını kontrol et
-            if (response.vote_average >= 5) {
-                // İçeriğin puanı 5 veya daha yüksekse, içeriğin sayfasına yönlendir
+            if (response.vote_average >= 8) {
                 navigate(`/${contentType}/${randomId}`);
             } else {
-                // İçeriğin puanı 5'ten düşükse, tekrar rastgele içerik seç
                 handleRandomClick();
             }
         } catch (error) {
@@ -99,7 +97,7 @@ const Header = () => {
                         Diziler
                     </li>
                     <li className="menuItem" onClick={handleRandomClick}>
-                        Rastgele
+                        Kendimi Şanslı Hissediyorum
                     </li>
                     <li className="menuItem">
                         <HiOutlineSearch onClick={openSearch} />

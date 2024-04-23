@@ -6,7 +6,7 @@ import logo from "../../../assets/s kopya.png";
 
 const Resimler = ({ data, loading }) => {
     const [images, setImages] = useState([]);
-    const [visibleImages, setVisibleImages] = useState(5); // Görünür resim sayısı
+    const [visibleImages, setVisibleImages] = useState(9); // Görünür resim sayısı
     const [scrollLeft, setScrollLeft] = useState(0);
     const [showLeftButton, setShowLeftButton] = useState(false);
     const [showRightButton, setShowRightButton] = useState(false);
@@ -17,10 +17,10 @@ const Resimler = ({ data, loading }) => {
     useEffect(() => {
         const fetchImages = async () => {
             try {
-                if (!data) return;
-                const mediaType = data.media_type === "movie" ? "movie" : "tv"; // İçeriğin medya türüne göre API endpoint'ini belirleme
+                if (!data || data.media_type === "person") return; // Eğer içerik bir dizi ise gösterme
+                const apiKey = "50b3c6dbb79aad9abebce47ea739e62d";
                 const response = await fetch(
-                    `https://api.themoviedb.org/3/movie/${data.id}/images?api_key=50b3c6dbb79aad9abebce47ea739e62d`
+                    `https://api.themoviedb.org/3/movie/${data.id}/images?api_key=${apiKey}`
                 );
                 if (!response.ok) {
                     throw new Error("Resimler alınamadı.");
@@ -69,6 +69,10 @@ const Resimler = ({ data, loading }) => {
         setImageLoading(false);
     };
 
+    const showMoreImages = () => {
+        setVisibleImages((prevVisibleImages) => prevVisibleImages + 5);
+    };
+
     return (
         <div className="resimlerSection">
             {images.length > 0 && (
@@ -108,6 +112,11 @@ const Resimler = ({ data, loading }) => {
                             </div>
                         )}
                     </div>
+                    {images.length > visibleImages && (
+                        <button className="showMoreButton" onClick={showMoreImages}>
+                            Daha Fazla Göster
+                        </button>
+                    )}
                 </ContentWrapper>
             )}
             {selectedImage && (
