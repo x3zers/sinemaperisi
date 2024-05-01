@@ -56,11 +56,12 @@
                 margin-right: 0;
             }
             svg {
-                font-size: 18px;
+                font-size: 24px; /* Daha büyük bir simge boyutu */
+                margin-right: 5px; /* Daha fazla boşluk */
             }
             cursor: pointer;
             &:hover {
-                color: black
+                color: #f7ca18; /* Hover rengi */
             }
         }
     }
@@ -74,13 +75,16 @@
             display: none;
         }
         svg {
-            font-size: 18px;
+            font-size: 24px; /* Daha büyük bir simge boyutu */
             color: white;
+            cursor: pointer;
+            &:hover {
+                color: #f7ca18; /* Hover rengi */
+            }
         }
     }
 
     &.mobileView {
-        
         background: var(--black3);
         .menuItems {
             display: flex;

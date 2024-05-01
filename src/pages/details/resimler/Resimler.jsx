@@ -6,21 +6,18 @@ import logo from "../../../assets/s kopya.png";
 
 const Resimler = ({ data, loading }) => {
     const [images, setImages] = useState([]);
-    const [visibleImages, setVisibleImages] = useState(9); // Görünür resim sayısı
-    const [scrollLeft, setScrollLeft] = useState(0);
-    const [showLeftButton, setShowLeftButton] = useState(false);
-    const [showRightButton, setShowRightButton] = useState(false);
     const resimlerRef = useRef(null);
     const [selectedImage, setSelectedImage] = useState(null);
-    const [imageLoading, setImageLoading] = useState(true);
+    const [showAllImages, setShowAllImages] = useState(false); // Tüm resimlerin gösterilip gösterilmediğini takip etmek için state
 
     useEffect(() => {
         const fetchImages = async () => {
             try {
-                if (!data || data.media_type === "person") return; // Eğer içerik bir dizi ise gösterme
+                if (!data) return;
                 const apiKey = "50b3c6dbb79aad9abebce47ea739e62d";
+                const type = data.type === 'movie' ? 'movie' : 'tv';
                 const response = await fetch(
-                    `https://api.themoviedb.org/3/movie/${data.id}/images?api_key=${apiKey}`
+                    `https://api.themoviedb.org/3/${type}/${data.id}/images?api_key=${apiKey}`
                 );
                 if (!response.ok) {
                     throw new Error("Resimler alınamadı.");
@@ -32,17 +29,9 @@ const Resimler = ({ data, loading }) => {
             }
         };
 
-        fetchImages(); 
+        fetchImages();
 
     }, [data]);
-
-    useEffect(() => {
-        if (resimlerRef.current) {
-            const { scrollWidth, clientWidth, scrollLeft } = resimlerRef.current;
-            setShowLeftButton(scrollLeft > 0);
-            setShowRightButton(scrollWidth - scrollLeft > clientWidth);
-        }
-    }, [scrollLeft]);
 
     const loadingSkeleton = () => {
         return (
@@ -50,11 +39,6 @@ const Resimler = ({ data, loading }) => {
                 <div className="thumb skeleton"></div>
             </div>
         );
-    };
-
-    const handleScroll = (scrollOffset) => {
-        resimlerRef.current.scrollLeft += scrollOffset;
-        setScrollLeft(resimlerRef.current.scrollLeft);
     };
 
     const enlargeImage = (image) => {
@@ -65,12 +49,8 @@ const Resimler = ({ data, loading }) => {
         setSelectedImage(null);
     };
 
-    const handleImageLoad = () => {
-        setImageLoading(false);
-    };
-
-    const showMoreImages = () => {
-        setVisibleImages((prevVisibleImages) => prevVisibleImages + 5);
+    const handleShowAllImages = () => {
+        setShowAllImages(true); // Tüm resimleri göster
     };
 
     return (
@@ -79,19 +59,13 @@ const Resimler = ({ data, loading }) => {
                 <ContentWrapper>
                     <div className="sectionHeading">Resimler</div>
                     <div className="resimlerWrapper">
-                        {showLeftButton && (
-                            <div className="navigationButton left" onClick={() => handleScroll(-200)}>
-                                {"<"}
-                            </div>
-                        )}
                         <div ref={resimlerRef} className="resimler">
                             {!loading ? (
-                                images.slice(0, visibleImages).map((image, index) => (
+                                images.map((image, index) => (
                                     <div key={index} className="imageItem" onClick={() => enlargeImage(image)}>
                                         <Img
                                             src={`https://image.tmdb.org/t/p/original/${image.file_path}`}
                                             alt={image.file_path}
-                                            onLoad={handleImageLoad}
                                             loading="lazy"
                                         />
                                     </div>
@@ -106,17 +80,10 @@ const Resimler = ({ data, loading }) => {
                                 </div>
                             )}
                         </div>
-                        {showRightButton && (
-                            <div className="navigationButton right" onClick={() => handleScroll(200)}>
-                                {">"}
-                            </div>
+                        {!showAllImages && images.length > 6 && ( // Tüm resimler gösterilmediyse ve 6'dan fazla resim varsa
+                            <button className="showMoreButton" onClick={handleShowAllImages}>Tümünü Göster</button>
                         )}
                     </div>
-                    {images.length > visibleImages && (
-                        <button className="showMoreButton" onClick={showMoreImages}>
-                            Daha Fazla Göster
-                        </button>
-                    )}
                 </ContentWrapper>
             )}
             {selectedImage && (

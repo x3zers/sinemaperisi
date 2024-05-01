@@ -31,7 +31,7 @@ const Footer = () => {
                     <li className="menuItem" onClick={() => handleMenuItemClick("Bu, web sitesi kullanım koşullarıdır. Kullanıcıların siteyi ne amaçla kullandıklarını, hangi şartlar altında kullanabileceklerini ve hangi yasaklar olduğunu açıklar.")}>Kullanım Koşulları</li>
                     <li className="menuItem" onClick={() => handleMenuItemClick("Bu, web sitesinin gizlilik politikasıdır. Site üzerindeki kullanıcıların kişisel verilerinin ne amaçla toplandığını, nasıl korunduğunu ve hangi koşullar altında üçüncü taraflarla paylaşıldığını belirler.")}>Gizlilik Politikası</li>
                 </ul>
-                <span className="imageContentDf">Dizifrag İşbirliğiyle Tasarlandı<img src={logo} alt="logo" className="logo-sineperi" /> x <img src={logotr} alt="logosineperi" /></span> 
+                <span className="imageContentDf">Dizifrag İşbirliğiyle Tasarlandı<img src={logo} alt="logo" className="logo-sineperi" /></span> 
                 <span className="imageContentZers">Zers Tarafından ☠️ ile geliştirildi.</span>
                 <div className="socialIcons">
                     <span className="icon"> 

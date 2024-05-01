@@ -13,33 +13,19 @@ import Img from "../../../components/lazyLoadImage/Img.jsx";
 import PosterFallback from "../../../assets/not-found.png";
 import { PlayIcon } from "../Playbtn";
 import VideoPopup from "../../../components/videoPopup/VideoPopup";
-import logo from "../../../assets/analogo.png";
+import logo from "../../../assets/s kopya.png";
 
 const DetailsBanner = ({ video, crew }) => {
     const [show, setShow] = useState(false);
     const [videoId, setVideoId] = useState(null);
-    const [autoRotate, setAutoRotate] = useState(false); // Otomatik dönüş özelliği
 
     const { mediaType, id } = useParams();
     const { data, loading } = useFetch(`/${mediaType}/${id}`);
     const { url } = useSelector((state) => state.home);
-    const [mediaIndex, setMediaIndex] = useState(0); // Medya indeksi (afiş veya backdrop için)
 
     const _genres = data?.genres?.map((g) => g.id);
 
-    useEffect(() => {
-        // Otomatik dönüş özelliği varsa, arka plan ve afişi değiştir
-        if (autoRotate) {
-            const intervalId = setInterval(() => {
-                setMediaIndex((prevIndex) => (prevIndex + 1) % data.backdrops.length);
-            }, 2000); // 2 saniyede bir değiştir
-            return () => clearInterval(intervalId);
-        }
-    }, [autoRotate, data]); // Otomatik dönüş veya data değiştiğinde efekti yeniden oluştur
 
-    const toggleAutoRotate = () => {
-        setAutoRotate(!autoRotate);
-    };
     
 
     const director = crew?.filter((f) => f.job === "Director");
@@ -58,7 +44,7 @@ const DetailsBanner = ({ video, crew }) => {
 
     const openWatchLink = () => {
         const contentName = data.name || data.title;
-        const searchUrl = `https://www.netflix.com/search?q=${encodeURIComponent(contentName)}`;
+        const searchUrl = `https://www.hdfilmizle.site/?s=${encodeURIComponent(data.title)}`;
         window.open(searchUrl, "_blank");
     };
 
@@ -143,7 +129,7 @@ const DetailsBanner = ({ video, crew }) => {
                                         data?.release_date
                                     ).format("YYYY")})`}
                                 </div>
-                                <div className="subtitle">{data.tagline}</div>
+                                <div className="subtitle">"{data.tagline}"</div>
 
                                 <Genres data={_genres} />
 
@@ -153,24 +139,27 @@ const DetailsBanner = ({ video, crew }) => {
                                     />
                                     <div
                                         className="playbtn"
-                                        onClick={openWatchLink}
+                                        onClick={() => {
+                                            setShow(true);
+                                            setVideoId(video.key);
+                                        }}
                                     >
                                         <PlayIcon />
                                         <span className="text">
-                                            İzle
+                                            Fragmanı İzle
                                             </span>
-                                            <span className="tooltip">Çıkan sitede izlemek istediğiniz içeriği izleyebilirsiniz.</span>
+                                            <span className="tooltip">Sayfayı kaydırarak diğer fragmanlara erişebilirsiniz.</span>
                                     </div>
-                                    <div
+                                       <div 
                                         className="logoBtn"
-                                        onClick={openLogoWatchLink}
+                                        onClick={openWatchLink}
                                     >
                                         <img src={logo} alt="Logo" className="logo" />
                                         <span className="text">
                                             'da izle
                                         </span>
-                                    </div>
-                                </div>
+                                    </div> 
+                                </div> 
 
                                 <div className="overview">
                                     <div className="heading">Açıklama</div>

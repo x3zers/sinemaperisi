@@ -14,7 +14,7 @@ const Header = () => {
     const [lastScrollY, setLastScrollY] = useState(0);
     const [mobileMenu, setMobileMenu] = useState(false);
     const [query, setQuery] = useState("");
-    const [showSearch, setShowSearch] = useState("");
+    const [showSearch, setShowSearch] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -63,13 +63,9 @@ const Header = () => {
 
     const handleRandomClick = async () => {
         try {
-            // Rastgele bir içerik türü seç
             const contentType = Math.random() < 0.5 ? "movie" : "tv";
-            // Rastgele bir TMDB ID al
-            const randomId = Math.floor(Math.random() * 500); // Burada gerçek bir id almalısınız
-            // İçeriğin detaylarını al
+            const randomId = Math.floor(Math.random() * 500);
             const response = await fetchDataFromApi(`/${contentType}/${randomId}`);
-            // İçeriğin puanını kontrol et
             if (response.vote_average >= 8) {
                 navigate(`/${contentType}/${randomId}`);
             } else {
@@ -120,6 +116,7 @@ const Header = () => {
                             <input
                                 type="text"
                                 placeholder="Film veya dizi ara..."
+                                value={query}
                                 onChange={(e) => setQuery(e.target.value)}
                                 onKeyUp={searchQueryHandler}
                             />
