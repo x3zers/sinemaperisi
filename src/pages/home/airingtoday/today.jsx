@@ -11,7 +11,7 @@ const Trending = () => {
     return (
         <div className="carouselSection">
             <ContentWrapper>
-                <span className="carouselTitle">Yakında</span>
+                <span className="carouselTitle">Bugün Çıkanlar</span>
              
             </ContentWrapper>
             <Carousel data={data?.results} loading={loading} />
