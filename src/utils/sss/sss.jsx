@@ -24,7 +24,8 @@ const SSS = () => {
       </header>
       <body>
         <div className="container">
-          <div className="accordion">
+        <h1>Sıkça Sorulan Sorular </h1>
+          <div className="accordion">        
             <AccordionItem
               question="Favori dizi nerede izleyebilirim?"
               answer="Sinemaperisi, Netflix, BluTV gibi platformlarda yayınlanan diziler hakkında incelemeler sunmaktadır."
