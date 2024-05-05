@@ -7,13 +7,18 @@ import {
 } from "react-icons/fa";
 
 import ContentWrapper from "../contentWrapper/ContentWrapper";
+import SSS from "../../utils/sss/sss"
 import logo from "../../../src/assets/analogo.png"; 
 import "./style.scss";
+
 
 const Footer = () => {
     const [popupContent, setPopupContent] = useState("");
     const [showPopup, setShowPopup] = useState(false);
-
+    
+    const handleClick = () => {
+        history.push('/sss');
+      };
     const handleMenuItemClick = (content) => {
         setPopupContent(content);
         setShowPopup(true);
@@ -28,7 +33,8 @@ const Footer = () => {
             <ContentWrapper>
                 <ul className="menuItems">
                     <li className="menuItem" onClick={() => handleMenuItemClick("Bu, web sitesi kullanım koşullarıdır. Kullanıcıların siteyi ne amaçla kullandıklarını, hangi şartlar altında kullanabileceklerini ve hangi yasaklar olduğunu açıklar.")}>Kullanım Koşulları</li>
-                    <li className="menuItem"></li>
+                    <li className="menuItem" onClick={() => navigate("/sss")}>Sıkça Sorulan Sorular</li>
+                    <li className="menuItem"  onClick={handleClick}>SSS'ye Git </li>
                     <li className="menuItem" onClick={() => handleMenuItemClick("Bu, web sitesinin gizlilik politikasıdır. Site üzerindeki kullanıcıların kişisel verilerinin ne amaçla toplandığını, nasıl korunduğunu ve hangi koşullar altında üçüncü taraflarla paylaşıldığını belirler.")}>Gizlilik Politikası</li>
                 </ul>
                 <span className="imageContentDf">Dizifrag İşbirliğiyle Tasarlandı<img src={logo} alt="logo" className="logo-sineperi" /></span> 
