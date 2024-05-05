@@ -12,12 +12,29 @@ import Details from "./pages/details/Details";
 import SearchResult from "./pages/searchResult/SearchResult";
 import Explore from "./pages/explore/Explore";
 import PageNotFound from "./pages/404/PageNotFound";
-import SSS from "./utils/sss/sss"
+import SSS from "../sss/sss"
+import mongoose from 'mongoose';
+
+let Header = require("./components/header/Header")
 
 function App() {
     const dispatch = useDispatch();
     const { url } = useSelector((state) => state.home);
-    console.log(url);
+    console.log(url);      
+
+    const [connectionStatus, setConnectionStatus] = useState("");
+    useEffect(() => {
+        mongoose.connect("mongodb://127.0.0.1:27017/site-server", {})
+            .then(() => {
+                setConnectionStatus("[SERVER] - MongoDB veritabanına bağlanıldı.");
+                console.log("[SERVER] - MongoDB veritabanına bağlanıldı.");
+            })
+            .catch(err => {
+                setConnectionStatus("[SERVER] - MongoDB veritabanına bağlanamadım!!");
+                console.error(err);
+                console.log("[SERVER] - MongoDB veritabanına bağlanamadım!!");
+            });
+    }, []);
 
     useEffect(() => {
         fetchApiConfig();
