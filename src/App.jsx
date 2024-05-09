@@ -14,6 +14,7 @@ import Explore from "./pages/explore/Explore";
 import PageNotFound from "./pages/404/PageNotFound";
 import Lisans from "../src/pages/Lisans/lisans"
 import SSS from "../src/pages/sss/sss"
+import Actor from "../src/pages/details/actorpage/actor"
 
 function App() {
     const dispatch = useDispatch();
@@ -68,6 +69,7 @@ function App() {
                 <Route path="*" element={<PageNotFound />} />
                 <Route path="/lisans" element={<Lisans />} />
                 <Route path="/sss" element={<SSS />} />
+                <Route path="/actor" element={<Actor />} />
             </Routes>
             <Footer />
         </BrowserRouter>

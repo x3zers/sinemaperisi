@@ -78,28 +78,34 @@
             input {
                 height: 50px;
                 background-color: rgba(0, 0, 0, 0.1);
-                backdrop-filter: blur(50px);
                 outline: 0;
                 border: 0;
                 color: white;
                 border-radius: 15px;
+                backdrop-filter: blur(50px);
                 padding: 0 15px;
-                font-size: 14px;
+                font-size: 10px;
+                transition: backdrop-filter 0.2s ease; /* Geçiş efekti ekleyelim */
+        
+                &:focus {
+                    backdrop-filter: blur(400px); /* Odaklanıldığında bulanıklaştırma efekti */
+                    background-color:  rgba(0, 0, 0, 0.2);
+                }
         
                 @media (min-width: -768px) {
                     width: calc(100% - 50px);
                     height: 60px;
                     font-size: 20px;
-                    padding: 0 30px;
+                    padding: 0 35px;
                 }
-                
+        
                 &::placeholder {
                     color: #ffffff; /* Gri renkte placeholder metni */
                 }
             }
         }
     }
-}        
+}
 
 .subTitle2 {
     font-size: 20px;
@@ -115,7 +121,7 @@
     display: flex;
     align-items: center;
     font-size: 16px;
-    font-weight: 35;
+    font-weight: 500;
     color: white;
     position: absolute;
     left: 50%;
@@ -124,7 +130,6 @@
     border-radius: 5px;
     bottom: -50px;
     transition: 0.3s;
-    background: rgba(0, 0, 0, 0);
     cursor: pointer;
     
 }

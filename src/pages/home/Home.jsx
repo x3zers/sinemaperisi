@@ -23,7 +23,7 @@ const Home = () => {
         <TopRated />
         <Yakinda />
         <Airingtoday />
-        <div style={{ height: 1000 }}></div>
+        <div style={{ height: 10 }}></div>
   </div>
   );
 };
