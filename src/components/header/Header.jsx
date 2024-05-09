@@ -14,7 +14,7 @@ const Header = () => {
     const [lastScrollY, setLastScrollY] = useState(0);
     const [mobileMenu, setMobileMenu] = useState(false);
     const [query, setQuery] = useState("");
-    const [showSearch, setShowSearch] = useState(false);
+    const [showSearch, setShowSearch] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -63,10 +63,14 @@ const Header = () => {
 
     const handleRandomClick = async () => {
         try {
+            // Rastgele bir içerik türü seç
             const contentType = Math.random() < 0.5 ? "movie" : "tv";
-            const randomId = Math.floor(Math.random() * 500);
+            // Rastgele bir TMDB ID al
+            const randomId = Math.floor(Math.random() * 500); // Burada gerçek bir id almalısınız
+            // İçeriğin detaylarını al
             const response = await fetchDataFromApi(`/${contentType}/${randomId}`);
-            if (response.vote_average >= 8) {
+            // İçeriğin puanını kontrol et
+            if (response.vote_average >= 9) {
                 navigate(`/${contentType}/${randomId}`);
             } else {
                 handleRandomClick();
@@ -77,7 +81,7 @@ const Header = () => {
     };
 
     return (
-        <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
+        <header className={`header2 ${mobileMenu ? "mobileView" : ""} ${show}`}>
             <ContentWrapper>
                 <div className="logo" onClick={() => navigate("/")}>
                     <img src={logo} alt="Logo" />
@@ -92,9 +96,7 @@ const Header = () => {
                     <li className="menuItem" onClick={() => navigate("explore/tv")}>
                         Diziler
                     </li>
-                    <li className="menuItem" onClick={handleRandomClick}>
-                        Kendimi Şanslı Hissediyorum
-                    </li>
+                    
                     <li className="menuItem">
                         <HiOutlineSearch onClick={openSearch} />
                     </li>
@@ -116,7 +118,6 @@ const Header = () => {
                             <input
                                 type="text"
                                 placeholder="Film veya dizi ara..."
-                                value={query}
                                 onChange={(e) => setQuery(e.target.value)}
                                 onKeyUp={searchQueryHandler}
                             />

@@ -1,6 +1,6 @@
 @import "../../mixins.scss";
 
-.header {
+.header2 {
     position: fixed;
     transform: translateY(0);
     width: 100%;
@@ -13,13 +13,13 @@
     
     &.top {
         background: rgba(0, 0, 0, 0.25);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
     }
     &.show {
         background: rgba(0, 0, 0, 0.15);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(80px);
+        -webkit-backdrop-filter: blur(80px);
     }
     &.hide {
         transform: translateY(-60px);
@@ -33,9 +33,8 @@
     .logo {
         cursor: pointer;
         img {
-            height: 50px;
+            height: 40px;
         }
-        user-select: none;
     }
     .menuItems {
         list-style-type: none;
@@ -48,20 +47,22 @@
             height: 60px;
             display: flex;
             align-items: center;
-            margin: 0 10px;
+            margin: 0 15px;
             color: white;
-            font-weight: 500;
+            font-weight: 800;
+            border-radius: 5px;
             position: relative;
             &.searchIcon {
                 margin-right: 0;
             }
             svg {
-                font-size: 24px; /* Daha büyük bir simge boyutu */
-                margin-right: 5px; /* Daha fazla boşluk */
+                font-size: 18px;
             }
             cursor: pointer;
             &:hover {
-                color: #f7ca18; /* Hover rengi */
+                color: rgb(187, 187, 187);
+                text-shadow: 1px 3px 8px rgba(0, 0, 0, 1);
+
             }
         }
     }
@@ -75,16 +76,13 @@
             display: none;
         }
         svg {
-            font-size: 24px; /* Daha büyük bir simge boyutu */
+            font-size: 18px;
             color: white;
-            cursor: pointer;
-            &:hover {
-                color: #f7ca18; /* Hover rengi */
-            }
         }
     }
 
     &.mobileView {
+        
         background: var(--black3);
         .menuItems {
             display: flex;

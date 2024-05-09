@@ -1,99 +1,65 @@
-import React, { useState, useEffect, useRef } from "react";
-import "./style.scss";
-import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
-import Img from "../../../components/lazyLoadImage/Img";
-import logo from "../../../assets/s kopya.png";
+import React, { useState, useEffect } from "react";
 
-const Resimler = ({ data, loading }) => {
-    const [images, setImages] = useState([]);
-    const resimlerRef = useRef(null);
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [showAllImages, setShowAllImages] = useState(false); // Tüm resimlerin gösterilip gösterilmediğini takip etmek için state
+const YourComponent = ({ mediaType, id }) => {
+  const [error, setError] = useState(null);
+  const [images, setImages] = useState([]);
 
-    useEffect(() => {
-        const fetchImages = async () => {
-            try {
-                if (!data) return;
-                const apiKey = "50b3c6dbb79aad9abebce47ea739e62d";
-                const type = data.type === 'movie' ? 'movie' : 'tv';
-                const response = await fetch(
-                    `https://api.themoviedb.org/3/${type}/${data.id}/images?api_key=${apiKey}`
-                );
-                if (!response.ok) {
-                    throw new Error("Resimler alınamadı.");
-                }
-                const imageData = await response.json();
-                setImages(imageData.backdrops);
-            } catch (error) {
-                console.error("Bir hata oluştu:", error);
-            }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const options = {
+          method: 'GET',
+          headers: {
+            Authorization: 'Bearer 50b3c6dbb79aad9abebce47ea739e62d'
+          }
         };
 
-        fetchImages();
+        // TMDB API'den IMDb ID'sini al
+        const tmdbResponse = await fetch(`https://api.themoviedb.org/3/${mediaType}/${id}/external_ids`, options);
+        const { imdb_id } = await tmdbResponse.json();
 
-    }, [data]);
+        // IMDb sayfasından resimleri çek
+        const imdbResponse = await fetch(`https://www.imdb.com/title/${imdb_id}/mediaindex/`);
+        const htmlContent = await imdbResponse.text();
 
-    const loadingSkeleton = () => {
-        return (
-            <div className="skItem">
-                <div className="thumb skeleton"></div>
-            </div>
-        );
+        // HTML içeriğini DOMParser kullanarak analiz et
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlContent, "text/html");
+
+        // DOM API'si kullanarak resim URL'lerini çek
+        const foundImages = [];
+        const imageElements = doc.querySelectorAll('#media_index_thumbnail_grid a img');
+        imageElements.forEach(img => {
+          try {
+            const imageUrl = img.getAttribute('src');
+            if (imageUrl.startsWith("https://m.media-amazon.com/")) {
+              foundImages.push(imageUrl);
+            }
+          } catch (error) {
+            console.error("Resim alınırken bir hata oluştu:", error);
+          }
+        });
+
+        setImages(foundImages);
+      } catch (error) {
+        setError("Resimler alınırken bir hata oluştu.");
+      }
     };
 
-    const enlargeImage = (image) => {
-        setSelectedImage(image);
-    };
+    fetchData();
+  }, [mediaType, id]);
 
-    const closeImage = () => {
-        setSelectedImage(null);
-    };
+  if (error) {
+    return <div>{error}</div>;
+  }
 
-    const handleShowAllImages = () => {
-        setShowAllImages(true); // Tüm resimleri göster
-    };
-
-    return (
-        <div className="resimlerSection">
-            {images.length > 0 && (
-                <ContentWrapper>
-                    <div className="sectionHeading">Resimler</div>
-                    <div className="resimlerWrapper">
-                        <div ref={resimlerRef} className="resimler">
-                            {!loading ? (
-                                images.map((image, index) => (
-                                    <div key={index} className="imageItem" onClick={() => enlargeImage(image)}>
-                                        <Img
-                                            src={`https://image.tmdb.org/t/p/original/${image.file_path}`}
-                                            alt={image.file_path}
-                                            loading="lazy"
-                                        />
-                                    </div>
-                                ))
-                            ) : (
-                                <div className="resimlerSkeleton">
-                                    {loadingSkeleton()}
-                                    {loadingSkeleton()}
-                                    {loadingSkeleton()}
-                                    {loadingSkeleton()}
-                                    {loadingSkeleton()}
-                                </div>
-                            )}
-                        </div>
-                        {!showAllImages && images.length > 6 && ( // Tüm resimler gösterilmediyse ve 6'dan fazla resim varsa
-                            <button className="showMoreButton" onClick={handleShowAllImages}>Tümünü Göster</button>
-                        )}
-                    </div>
-                </ContentWrapper>
-            )}
-            {selectedImage && (
-                <div className="enlargedImageView" onClick={closeImage}>
-                    <img src={`https://image.tmdb.org/t/p/original/${selectedImage.file_path}`} alt={selectedImage.file_path} />
-                    <img src={logo} className="logo" alt="logo" />
-                </div>
-            )}
-        </div>
-    );
+  return (
+    <div>
+      {images.map((imageUrl, index) => (
+        <img key={index} src={imageUrl} alt={`Resim ${index}`} />
+      ))}
+    </div>
+  );
 };
 
-export default Resimler;
+export default YourComponent;

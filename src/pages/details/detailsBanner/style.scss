@@ -50,7 +50,7 @@
         flex-direction: column;
         gap: 25px;
         @include md {
-            gap: 50px;
+            gap: 40px;
             flex-direction: row;
         }
         .left {
@@ -294,7 +294,7 @@
     background-color: #131720; 
     border: none;
     border-radius: 10px;
-    padding: 5px 10px;
+    padding: 5px 5px;
     margin-left: 10px; // İzle butonundan biraz uzaklık bırakmak için
     cursor: pointer;
     transition: background-color 0.3s; // Geçiş efekti
@@ -307,14 +307,14 @@
     }
     
     &:hover {
-        background-color: #ffffff; // Hover durumunda arka plan rengini değiştir
+        background-color: #131720; // Hover durumunda arka plan rengini değiştir
     }
 
     img.logo {
-        width: 55px;
+        width: 85px; // Logo boyutu düzenlendi
         height: auto;
-        margin-right: 10px; 
-        transition: transform 0.2s;
+        margin-right: -10px; // Logodan yazıya olan mesafe
+        transition: transform 0.2s; // Hover efekti için geçiş efekti eklendi
     }
 
     .text {
@@ -341,5 +341,83 @@
     
     &:hover {
         background-color: #0056b3; /* Üzerine gelince arkaplan rengi değişsin */
+    }
+}
+.fragman{
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+.bas{
+    color: red;
+}
+.socialMedia {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    .heading {
+        color: #fff;
+        margin-bottom: 10px;
+    }
+
+    .socialLinks {
+        display: flex;
+        flex-wrap: wrap;
+
+        a {
+            display: flex;
+            align-items: center;
+            color: #000000;
+            text-decoration: none;
+            margin-right: 10px;
+            margin-top: 5px;
+            min-width: auto; /* Genişlik otomatik ayarlanacak */
+            padding-right: 15px;
+            height: 30px;
+            border-radius: 10px;
+            background: #ffffff;
+            transition: background-color 0.5s;
+            position: relative; /* A etiketinin pozisyonunu göreceli olarak ayarlayalım */
+
+            :before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(255 255 255 / 16%) 50%, rgba(255, 255, 255, 0));
+                animation: 3s linear infinite 
+            }
+
+            svg {
+                margin-left: 10px;
+                margin-right: 5px;
+                transition: margin-left 0.5s;
+            }
+
+            span {
+                font-size: 16px;
+            }
+
+            &:hover {
+                background: #1e1e1e;
+                color: #ffffff;
+
+                svg {
+                    margin-left: 15px;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        .socialLinks {
+            a {
+                min-width: auto; /* Genişlik otomatik ayarlanacak */
+                margin-right: 5px;
+                padding-right: 20px; /* Belirli bir boşluk bırak */
+                height: 30px;
+            }
+        }
     }
 }

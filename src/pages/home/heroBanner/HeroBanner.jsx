@@ -69,7 +69,7 @@ const HeroBanner = () => {
                     </div>
                 </div>
                 <span className="imageContent2" onClick={() => window.open('https://dizifrag.org')}>
-                Sineperi gücünü <img src={logo} alt="logo"/>'dan alıyor
+                {/*Film Evreni gücünü <img src={logo} alt="logo"/>'dan alıyor*/}
                 </span>
             </ContentWrapper>
         </div>

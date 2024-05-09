@@ -9,7 +9,7 @@ import Videolar from "./videolar/videolar";
 import Similar from "./carousels/Similar";
 import Recommendation from "./carousels/Recommendation";
 import Justwatch from "./justwatch/justwatch"
-import Resimler from "./resimler/Resimler"
+import Resimler from "./resimler/resimler"
 
 const Details = () => {
     const { mediaType, id } = useParams();

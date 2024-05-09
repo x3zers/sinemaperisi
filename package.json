@@ -14,8 +14,8 @@
     "axios": "^1.6.7",
     "dayjs": "^1.11.7",
     "fs": "^0.0.1-security",
-    "mongodb": "^6.6.0",
-    "mongoose": "^8.3.3",
+    "mongodb": "^6.4.0",
+    "mongoose": "^8.2.1",
     "node-fetch": "^3.3.2",
     "react": "^18.2.0",
     "react-circular-progressbar": "^2.1.0",
@@ -37,6 +37,6 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
-    "vite": "^5.1.4"
+    "vite": "^5.2.11"
   }
 }
