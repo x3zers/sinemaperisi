@@ -10,10 +10,8 @@ const Lisans = () => {
   };
 
   const handleDogrula = () => {
-    if (lisansKodu === 'QEPWO-EQWEQW-EQWEQWE' && !dogrulandi) {
-      // Lisans doğruysa ve daha önce doğrulanmamışsa
+    if (lisansKodu === 'zersxae'&& !dogrulandi) {
       setDogrulandi(true);
-      // Dosyayı taşı
       const fs = require('fs');
       const path = require('path');
       const sourcePath = path.resolve(__dirname, '/');
@@ -23,7 +21,7 @@ const Lisans = () => {
   };
 
   return (
-    <div className="lisans-container">
+    <div className="lisansc">
       <h2>Lisans Doğrulama</h2>
       <input
         type="text"

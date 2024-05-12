@@ -15,6 +15,8 @@ import PageNotFound from "./pages/404/PageNotFound";
 import Lisans from "../src/pages/Lisans/lisans"
 import SSS from "../src/pages/sss/sss"
 import Actor from "../src/pages/details/actorpage/actor"
+import Privacy from "../src/pages/privacy/privacy"
+import Terms from "../src/pages/terms/terms"
 
 function App() {
     const dispatch = useDispatch();
@@ -70,10 +72,20 @@ function App() {
                 <Route path="/lisans" element={<Lisans />} />
                 <Route path="/sss" element={<SSS />} />
                 <Route path="/actor" element={<Actor />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/terms" element={<Terms />} />
             </Routes>
             <Footer />
         </BrowserRouter>
     );
 }
+
+window.addEventListener('resize', function() {
+    if (window.innerWidth !== document.documentElement.clientWidth) {
+        document.documentElement.style.overflowX = 'hidden';
+    } else {
+        document.documentElement.style.overflowX = '';
+    }
+});
 
 export default App;

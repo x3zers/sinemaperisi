@@ -7,7 +7,6 @@ import TrendFilmler from "./trendFilmler/trendfilmler";
 import Popular from "./popular/Popular";
 import TopRated from "./topRated/TopRated";
 import TrendDiziler from "./trendDiziler/trenddiziler";
-import Yakinda from "./yakinda/yakindagelecekler";
 import Airingtoday from "./airingtoday/today"
 
 
@@ -21,9 +20,8 @@ const Home = () => {
         <TrendDiziler />
         <Popular />
         <TopRated />
-        <Yakinda />
-        <Airingtoday />
-        <div style={{ height: 10 }}></div>
+        {/* <Airingtoday /> */}
+        <div style={{ height: 1 }}></div>
   </div>
   );
 };

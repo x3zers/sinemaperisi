@@ -14,18 +14,17 @@ const SSS = () => {
   };
 
   return (
-    <div>
-            <p className="baslik" >Sıkça Sorulan Sorular </p>
-      <div className="container2">
-        <div className="accordion">
-          <div className="accordion-item" onClick={toggleAccordion}>
-            <div className="accordion-question">Favori dizi nerede izleyebilirim?</div>
-            <div className="accordion-answer">Sinemaperisi, Netflix, BluTV gibi platformlarda yayınlanan diziler hakkında incelemeler sunmaktadır.</div>
-          </div>
-          <div className="accordion-item" onClick={toggleAccordion}>
-            <div className="accordion-question">Dizi önerileriniz nelerdir?</div>
-            <div className="accordion-answer">Her hafta yeni dizileri ve popüler dizileri inceleyerek öneriler sunmaktayız. Sitemizi takip ederek güncel önerilere ulaşabilirsiniz.</div>
-          </div>
+    <div className="faq-container">
+      <h2 className="faq-title">Sıkça Sorulan Sorular</h2>
+      <div className="accordion">
+        <div className="accordion-item" onClick={toggleAccordion}>
+          <div className="accordion-question">Favori dizimi nerede izleyebilirim?</div>
+          <div className="accordion-answer">Sinemaperisi, Netflix, BluTV gibi platformlarda yayınlanan diziler hakkında incelemeler sunmaktadır.</div>
+        </div>
+        <div className="accordion-item" onClick={toggleAccordion}>
+          <div className="accordion-question">Dizi önerileriniz nelerdir?</div>
+          <div className="accordion-answer">Her hafta yeni dizileri ve popüler dizileri inceleyerek öneriler sunmaktayız. Sitemizi takip ederek güncel önerilere ulaşabilirsiniz.</div>
+        </div>
           <div class="accordion-item" onClick={toggleAccordion}>
         <div class="accordion-question">Üye olmak ücretsiz mi?</div>
         <div class="accordion-answer">Evet, Sinemaperisi'ne ücretsiz olarak üye olabilirsiniz.</div>
@@ -60,7 +59,6 @@ const SSS = () => {
       </div>
         </div>
       </div>
-    </div>
   );
 };
 

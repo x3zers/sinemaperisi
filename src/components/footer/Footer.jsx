@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import useFetch from "../../hooks/useFetch";
+import { useSelector } from "react-redux";
 import {
     FaFacebookF,
     FaInstagram,
@@ -7,13 +10,27 @@ import {
 } from "react-icons/fa";
 
 import ContentWrapper from "../contentWrapper/ContentWrapper";
-import logo from "../../../src/assets/analogo.png"; 
-import logotr  from "../../assets/s kopya.png";
 import "./style.scss";
+
 
 const Footer = () => {
     const [popupContent, setPopupContent] = useState("");
     const [showPopup, setShowPopup] = useState(false);
+    const navigate = useNavigate();
+    const [background, setBackground] = useState("");
+    const { url } = useSelector((state) => state.home);
+    const { data } = useFetch("/movie/upcoming");
+    const [imageContent, setImageContent] = useState("");
+
+    useEffect(() => {
+        if (data) {
+            const randomIndex = Math.floor(Math.random() * 20);
+            const selectedMovie = data?.results?.[randomIndex];
+            const bg = url.backdrop + selectedMovie?.backdrop_path;
+            setBackground(bg);
+            setImageContent(selectedMovie);
+        }
+    }, [data, url]);
 
     const handleMenuItemClick = (content) => {
         setPopupContent(content);
@@ -28,8 +45,9 @@ const Footer = () => {
         <footer className="footer">
             <ContentWrapper>
                 <ul className="menuItems">
-                    <li className="menuItem" onClick={() => handleMenuItemClick("Bu, web sitesi kullanım koşullarıdır. Kullanıcıların siteyi ne amaçla kullandıklarını, hangi şartlar altında kullanabileceklerini ve hangi yasaklar olduğunu açıklar.")}>Kullanım Koşulları</li>
-                    <li className="menuItem" onClick={() => handleMenuItemClick("Bu, web sitesinin gizlilik politikasıdır. Site üzerindeki kullanıcıların kişisel verilerinin ne amaçla toplandığını, nasıl korunduğunu ve hangi koşullar altında üçüncü taraflarla paylaşıldığını belirler.")}>Gizlilik Politikası</li>
+                    <li className="menuItem" onClick={() => navigate('/terms')}>Kullanım Koşulları </li>
+                    <li className="menuItem" onClick={() => navigate('/sss')}>Sıkça Sorulan Sorular</li>
+                    <li className="menuItem" onClick={() => navigate('/privacy')}>Gizlilik Politikaası</li>
                 </ul>
                 <span className="aciklama">Film Evreni, senin sinema ve dizi yolculuğunun bir parçası. Her sahneyi ve karakteri keşfetmeye hazır mısın? Birbirinden heyecan verici incelemeler ve önerilerle dolu bu dünyada, sinemanın ve dizilerin büyülü dünyasında iz bırakmaya hazır ol. Hayal gücünü özgür bırak ve Film Evreni'nde yeni maceralara doğru bir adım at!</span> 
                 <div className="socialIcons">

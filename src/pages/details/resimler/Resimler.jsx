@@ -16,10 +16,10 @@ const YourComponent = ({ mediaType, id }) => {
 
         // TMDB API'den IMDb ID'sini al
         const tmdbResponse = await fetch(`https://api.themoviedb.org/3/${mediaType}/${id}/external_ids`, options);
-        const { imdb_id } = await tmdbResponse.json();
+        const { data_imdb_id } = await tmdbResponse.json();
 
         // IMDb sayfasından resimleri çek
-        const imdbResponse = await fetch(`https://www.imdb.com/title/${imdb_id}/mediaindex/`);
+        const imdbResponse = await fetch(`https://www.imdb.com/title/${data_imdb_id}/mediaindex/`);
         const htmlContent = await imdbResponse.text();
 
         // HTML içeriğini DOMParser kullanarak analiz et

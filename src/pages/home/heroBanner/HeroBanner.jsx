@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"; // Link ekledik
 import { useSelector } from "react-redux";
 import "./style.scss";
 import logo from "../../../assets/analogo.png";
@@ -43,7 +43,9 @@ const HeroBanner = () => {
         <div className="heroBanner">
             {data && (
                 <div className="backdrop-img">
-                    <Img src={background} onClick={handleImageClick} />
+                   {/*<Link to={`/movie/${imageContent.id}`}> {/* Link kullanımı */}
+                        <Img src={background} onClick={handleImageClick} />
+                   {/* </Link> */}
                 </div>
             )}
 
@@ -69,11 +71,11 @@ const HeroBanner = () => {
                     </div>
                 </div>
                 <span className="imageContent2" onClick={() => window.open('https://dizifrag.org')}>
-                {/*Film Evreni gücünü <img src={logo} alt="logo"/>'dan alıyor*/}
+                    <img src={logo} alt="logo"/>tarafından güçlendirildi.
                 </span>
+              
             </ContentWrapper>
         </div>
     );
 };
-
 export default HeroBanner;

@@ -1,0 +1,42 @@
+// KullanımKosullari.scss
+
+.terms-container {
+    max-width: 800px;
+    margin: 0px auto;
+    padding: 80px;
+    border-radius: 8px;
+    color: #ffffff;
+  }
+  
+  .terms-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .terms-container h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .terms-container p {
+    margin-bottom: 15px;
+  }
+  
+  .terms-container ul {
+    margin-bottom: 15px;
+    padding-left: 20px;
+  }
+  
+  .terms-container a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .terms-container a:hover {
+    text-decoration: underline;
+  }
+  .zers{
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
