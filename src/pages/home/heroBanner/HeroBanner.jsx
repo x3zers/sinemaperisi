@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"; // Link ekledik
 import { useSelector } from "react-redux";
 import "./style.scss";
 import logo from "../../../assets/analogo.png";
@@ -18,26 +18,12 @@ const HeroBanner = () => {
     const [imageContent, setImageContent] = useState("");
 
     useEffect(() => {
-        const lastUpdate = localStorage.getItem("lastUpdate");
-        const currentDate = new Date();
-        const currentDay = currentDate.getDate();
-
         if (data) {
-            if (!lastUpdate || new Date(lastUpdate).getDate() !== currentDay) {
-                const randomIndex = Math.floor(Math.random() * 20);
-                const selectedMovie = data?.results?.[randomIndex];
-                const bg = url.backdrop + selectedMovie?.backdrop_path;
-                setBackground(bg);
-                setImageContent(selectedMovie);
-                localStorage.setItem("background", bg);
-                localStorage.setItem("imageContent", JSON.stringify(selectedMovie));
-                localStorage.setItem("lastUpdate", currentDate);
-            } else {
-                const savedBackground = localStorage.getItem("background");
-                const savedImageContent = JSON.parse(localStorage.getItem("imageContent"));
-                setBackground(savedBackground);
-                setImageContent(savedImageContent);
-            }
+            const randomIndex = Math.floor(Math.random() * 20);
+            const selectedMovie = data?.results?.[randomIndex];
+            const bg = url.backdrop + selectedMovie?.backdrop_path;
+            setBackground(bg);
+            setImageContent(selectedMovie);
         }
     }, [data, url]);
 
@@ -57,7 +43,9 @@ const HeroBanner = () => {
         <div className="heroBanner">
             {data && (
                 <div className="backdrop-img">
-                    <Img src={background} onClick={handleImageClick} />
+                   <Link to={`/movie/${imageContent.id}`}> 
+                        <Img src={background} onClick={handleImageClick} />
+                    </Link> 
                 </div>
             )}
 
@@ -83,11 +71,11 @@ const HeroBanner = () => {
                     </div>
                 </div>
                 <span className="imageContent2" onClick={() => window.open('https://dizifrag.org')}>
-                    <img src={logo} alt="logo"/> tarafından güçlendirildi.
+                    <img src={logo} alt="logo"/>tarafından güçlendirildi.
                 </span>
+              
             </ContentWrapper>
         </div>
     );
 };
-
 export default HeroBanner;
