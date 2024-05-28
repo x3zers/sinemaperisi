@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
 
+import Icerik from "./actoricerik.jsx"
 import "./style.scss";
 
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
@@ -15,8 +17,8 @@ const ActorDetails = () => {
     const [socialMedia, setSocialMedia] = useState(null);
     const [actorCredits, setActorCredits] = useState([]);
     const [actorImage, setActorImage] = useState([]);
-    const apikey = "50b3c6dbb79aad9abebce47ea739e62d";
-    const actorId ="106619";
+    const apikey = "095262b2872d2235d6da623056c10cd9";
+    const actorId ="989325";
     
 
     useEffect(() => {
@@ -199,7 +201,9 @@ const ActorDetails = () => {
                                         </div>
                                     )}
                                 </div>
-
+                                <div class="page-bg"></div>
+                                <div style={{ height: 400 }}></div>
+                                <Icerik />
                                 {/*<div className="credits">
                                     {actorCredits.length > 0 && (
                                         <div className="actorCredits">

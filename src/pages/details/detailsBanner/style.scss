@@ -167,12 +167,12 @@
                     .triangle {
                         stroke-dashoffset: 0;
                         opacity: 1;
-                        stroke: var(--pink);
+                        stroke: var(--white);
                         animation: trailorPlay 0.7s ease-in-out;
                     }
                     .circle {
                         stroke-dashoffset: 0;
-                        stroke: var(--pink);
+                        stroke: var(--white);
                     }
                 }
             }
@@ -281,7 +281,6 @@
     }
 }
 
-
 .logoBtn {
     display: flex;
     align-items: center;
@@ -291,59 +290,25 @@
     border-radius: 10px;
     padding: 5px 5px;
     margin-left: 10px; // İzle butonundan biraz uzaklık bırakmak için
-    cursor: pointer;
     transition: background-color 0.3s; // Geçiş efekti
-    &:hover {
-        transform: scale(1.4); /* Hover olduğunda büyüklük artışı */
-    }
-
-    .logoBtn:hover .tooltip {
-        display: block;
-    }
-    
-    &:hover {
-        background-color: #131720; // Hover durumunda arka plan rengini değiştir
-    }
-
     img.logo {
-        width: 85px; // Logo boyutu düzenlendi
+        width: 140px;
         height: auto;
-        margin-right: -10px; // Logodan yazıya olan mesafe
-        transition: transform 0.2s; // Hover efekti için geçiş efekti eklendi
+        transform: scale(1.6);
+        margin-right: -3px; // Logodan yazıya olan mesafe
+        transition: 0.3s; // Hover efekti için geçiş efekti eklendi
     }
 
     .text {
         color: white; // Yazı rengi
         font-size: 16px; // Yazı boyutu
+        transition: 0.5s;
     }
 
     &:hover img.logo {
-        transform: scale(1.4); // Hover durumunda logo boyutunu büyüt
+        width: 120px; 
     }
 
-    &:hover {
-        background-color: #131720; // Butona hover durumunda arka plan rengini değiştir
-    }
-}
-.butonDevamEt {
-    background-color: #007bff; /* Varsayılan renk */
-    color: #fff; /* Yazı rengi */
-    border: none; /* Kenarlık yok */
-    padding: 5px 10px; /* Buton içi boşluk */
-    border-radius: 4px; /* Köşeleri yuvarla */
-    cursor: pointer; /* Üzerine gelince imleç el işareti olsun */
-    transition: background-color 0.3s; /* Geçiş efekti */
-    
-    &:hover {
-        background-color: #0056b3; /* Üzerine gelince arkaplan rengi değişsin */
-    }
-}
-.fragman{
-    cursor: pointer;
-    margin-bottom: 20px;
-}
-.bas{
-    color: red;
 }
 .socialMedia {
     margin-top: 10px;
@@ -364,14 +329,14 @@
             color: #000000;
             text-decoration: none;
             margin-right: 10px;
-            margin-top: 5px;
-            min-width: auto; /* Genişlik otomatik ayarlanacak */
+            margin-top: 7px;
+            min-width: auto;
             padding-right: 15px;
             height: 30px;
             border-radius: 10px;
             background: #ffffff;
             transition: background-color 0.5s;
-            position: relative; /* A etiketinin pozisyonunu göreceli olarak ayarlayalım */
+            position: relative; 
 
             :before {
                 content: '';
@@ -387,7 +352,7 @@
             svg {
                 margin-left: 10px;
                 margin-right: 5px;
-                transition: margin-left 0.5s;
+                transition: margin-left 0.55s;
             }
 
             span {

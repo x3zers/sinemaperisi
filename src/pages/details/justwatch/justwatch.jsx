@@ -7,8 +7,9 @@ const DetailsPage = () => {
     const { mediaType, id } = useParams();
     const [watchProviders, setWatchProviders] = useState(null);
     const [error, setError] = useState(null);
+    const apikey = "50b3c6dbb79aad9abebce47ea739e62d";
 
-    const determineMediaType = () => {
+      const determineMediaType = () => {
         // mediaType parametresine göre içeriğin türünü belirle
         if (mediaType === "movie") {
             return "movie";
@@ -23,7 +24,7 @@ const DetailsPage = () => {
         const fetchWatchProviders = async () => {
             try {
                 const mediaType = determineMediaType();
-                const response = await fetch(`https://api.themoviedb.org/3/${mediaType}/${id}/watch/providers?api_key=50b3c6dbb79aad9abebce47ea739e62d`);
+                const response = await fetch(`https://api.themoviedb.org/3/${mediaType}/${id}/watch/providers?api_key=${apikey}`);
                 if (!response.ok) {
                     throw new Error("Watch providers could not be fetched.");
                 }
@@ -39,6 +40,10 @@ const DetailsPage = () => {
             fetchWatchProviders();
         }
     }, [mediaType, id]);
+
+    const handleClick = (link) => {
+        window.open(link, "_blank");
+    };
 
     return (
         <div className="detailsPage">
@@ -63,6 +68,7 @@ const DetailsPage = () => {
                                             className="logo"
                                             alt={provider.provider_name}
                                         />
+                                        <div className="providerName">{provider.provider_name}</div>
                                     </button>
                                 ))}
                             </div>

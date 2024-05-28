@@ -17,6 +17,7 @@ import SSS from "../src/pages/sss/sss"
 import Actor from "../src/pages/details/actorpage/actor"
 import Privacy from "../src/pages/privacy/privacy"
 import Terms from "../src/pages/terms/terms"
+import EmmyWinners from "./pages/home/emmyWinners/emmyWinners";
 
 function App() {
     const dispatch = useDispatch();
@@ -74,18 +75,11 @@ function App() {
                 <Route path="/actor" element={<Actor />} />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/terms" element={<Terms />} />
+                <Route path="/emmy" element={<EmmyWinners />} />
             </Routes>
             <Footer />
         </BrowserRouter>
     );
 }
-
-window.addEventListener('resize', function() {
-    if (window.innerWidth !== document.documentElement.clientWidth) {
-        document.documentElement.style.overflowX = 'hidden';
-    } else {
-        document.documentElement.style.overflowX = '';
-    }
-});
 
 export default App;

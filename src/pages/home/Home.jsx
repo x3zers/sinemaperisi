@@ -7,7 +7,8 @@ import TrendFilmler from "./trendFilmler/trendfilmler";
 import Popular from "./popular/Popular";
 import TopRated from "./topRated/TopRated";
 import TrendDiziler from "./trendDiziler/trenddiziler";
-import Airingtoday from "./airingtoday/today"
+import EmmyWinners from "./emmyWinners/emmyWinners"
+import Oyuncular from "./oyuncular/oyuncular"
 
 
 HeroBanner;
@@ -18,9 +19,10 @@ const Home = () => {
         <HeroBanner />
         <TrendFilmler />
         <TrendDiziler />
+        <Oyuncular/>
         <Popular />
         <TopRated />
-        {/* <Airingtoday /> */}
+      {/*  <EmmyWinners /> */}
         <div style={{ height: 1 }}></div>
   </div>
   );

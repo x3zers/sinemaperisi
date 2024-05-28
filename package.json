@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
-    "axios": "^1.6.7",
+    "@vitalets/google-translate-api": "^9.2.0",
+    "axios": "^1.6.8",
     "dayjs": "^1.11.7",
     "fs": "^0.0.1-security",
     "mongodb": "^6.4.0",

@@ -102,5 +102,77 @@
     object-fit: cover;
     border-radius: 10px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-    transition: 0.4s;
+    transition: 0.8s;
+    &:hover{
+        transform: scale(1.1);
+    }
 }
+.page-bg {
+    position: fixed;
+    top: 70;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    z-index: -1;
+    opacity: 0.1; /* Arkaplan opaklığı */
+    background-image: url('https://cdn.discordapp.com/attachments/1171131592719212616/1245053341764157612/1080p_post_tasarim_1080p_kopya.png?ex=665759c8&is=66560848&hm=d69836654408f3e7512a9f7d5508c9165abbe56e8d544cf9fa75a234378d5601&');
+    background-size: cover;
+    background-position: center;
+    margin-top: 60px;
+}
+.carouselSection {
+
+    .images {
+      display: flex;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch; /* iOS desteği için */
+    }
+  
+    img {
+      width: 150px; /* Resim genişliği */
+      height: 200px; /* Resim yüksekliği */
+      margin-right: 10px; /* Resimler arası boşluk */
+      border-radius: 8px; /* Yuvarlatılmış köşeler */
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+  
+    img:hover {
+      transform: scale(1.1); /* Hover'da resmin boyutunu büyütme */
+    }
+  
+    /* İlk ve son resimlerde sağ ve sol boşluklar */
+    img:first-child {
+      margin-left: 0;
+    }
+  
+    img:last-child {
+      margin-right: 0;
+    }
+  
+    .enlarged-image {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      overflow-y: auto;
+    }
+  
+    .enlarged-image img {
+      max-width: 80%;
+      max-height: 80%;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  
+    .enlarged-image.active {
+      display: flex;
+    }
+  }
+  

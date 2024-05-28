@@ -9,11 +9,19 @@ import Videolar from "./videolar/videolar";
 import Similar from "./carousels/Similar";
 import Recommendation from "./carousels/Recommendation";
 import Justwatch from "./justwatch/justwatch"
-
+import Yorumlar from "./yorumlar/yorumlar"
 
 const Details = () => {
     const { mediaType, id } = useParams();
-    const { data: videos, loading: videosLoading } = useFetch(`/${mediaType}/${id}/videos`);
+    let language = "tr,en"; // Varsayılan dil seçeneği Türkçe ve İngilizce olarak ayarlandı
+
+    // Dil seçeneğini belirle
+    if (navigator.language.startsWith("tr")) {
+        // Eğer kullanıcının tarayıcısı Türkçe ise
+        language = "tr";
+    }
+
+    const { data: videos, loading: videosLoading } = useFetch(`/${mediaType}/${id}/videos?language=${language}`);
     const { data: credits, loading: creditsLoading } = useFetch(`/${mediaType}/${id}/credits`);
 
     return (
@@ -24,6 +32,7 @@ const Details = () => {
             <Justwatch data={videos} loading={videosLoading} /> 
             <Recommendation mediaType={mediaType} id={id} />
             <Similar mediaType={mediaType} id={id} />
+            <Yorumlar mediaType={mediaType} id={id} />
         </div>
     );
 };
