@@ -3,7 +3,6 @@ import axios from "axios";
 const BASE_URL = "https://api.themoviedb.org/3";
 const TMDB_TOKEN = import.meta.env.VITE_APP_TMDB_TOKEN;
 const IPAPI_URL = "https://ipapi.co/json/";
-
 const headers = {
     Authorization: "Bearer " + TMDB_TOKEN,
 };
@@ -33,7 +32,7 @@ const getCountryBasedLanguage = async () => {
         }
     } catch (error) {
         console.error("Error fetching country data from IP API:", error);
-        return "en"; // Hata durumunda varsayılan dil olarak İngilizce'yi döndür
+        return "tr"; // Hata durumunda varsayılan dil olarak İngilizce'yi döndür
     }
 };
 

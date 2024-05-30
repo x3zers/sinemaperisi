@@ -42,11 +42,9 @@
     .content {
         display: flex;
         position: relative;
-        flex-direction: column;
         gap: 25px;
         @include md {
             gap: 40px;
-            flex-direction: row;
         }
         .left {
             flex-shrink: 0;
@@ -54,14 +52,14 @@
                 width: 100%;
                 display: block;
                 border-radius: 15px;
-                transition: transform 0.4s ease; // transform özelliğindeki değişiklikleri 0.3 saniye boyunca geçiş efektiyle gerçekleştir
+                transition: transform 0.4s ease;
             
                 @include md {
                     max-width: 350px;
                 }
             
                 &:hover {
-                    transform: scale(1.05); // Fare üzerine gelindiğinde boyutu büyüt
+                    transform: scale(1.05);
                 }
             }
             
@@ -263,23 +261,6 @@
 .playbtn:hover .tooltip {
     display: block;
 }
-.info {
-    .watchProviders {
-        margin-top: 20px;
-        font-size: 18px;
-        color: white;
-        .provider {
-            display: inline-block;
-            margin-right: 10px;
-            padding: 5px 10px;
-            border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.2);
-            &:hover {
-                background-color: rgba(255, 255, 255, 0.4);
-            }
-        }
-    }
-}
 
 .logoBtn {
     display: flex;
@@ -289,8 +270,8 @@
     border: none;
     border-radius: 10px;
     padding: 5px 5px;
-    margin-left: 10px; // İzle butonundan biraz uzaklık bırakmak için
-    transition: background-color 0.3s; // Geçiş efekti
+    margin-left: 5px; 
+    transition: background-color 0.3s; 
     img.logo {
         width: 140px;
         height: auto;
@@ -306,7 +287,7 @@
     }
 
     &:hover img.logo {
-        width: 120px; 
+        width: 150px; 
     }
 
 }
@@ -364,7 +345,78 @@
                 color: #ffffff;
 
                 svg {
-                    margin-left: 15px;
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        .socialLinks {
+            a {
+                min-width: auto; /* Genişlik otomatik ayarlanacak */
+                margin-right: 5px;
+                padding-right: 20px; /* Belirli bir boşluk bırak */
+                height: 30px;
+            }
+        }
+    }
+}
+.socialMediaIMDB {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    .heading {
+        color: #fff;
+        margin-bottom: 10px;
+    }
+
+    .socialLinksIMDB {
+        display: flex;
+        flex-wrap: wrap;
+
+        a {
+            display: flex;
+            align-items: center;
+            color: #000000;
+            text-decoration: none;
+            margin-right: 10px;
+            margin-top: 7px;
+            min-width: auto;
+            padding-right: 15px;
+            height: 30px;
+            border-radius: 10px;
+            background: #ffffff;
+            transition: background-color 0.5s;
+            position: relative; 
+
+            :before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(255 255 255 / 16%) 50%, rgba(255, 255, 255, 0));
+                animation: 3s linear infinite 
+            }
+
+            svg {
+                margin-left: 10px;
+                margin-right: 5px;
+                transition: margin-left 0.55s;
+            }
+
+            span {
+                font-size: 16px;
+            }
+
+            &:hover {
+                background: #1b1b1b;
+                color: #fffb00;
+
+                svg {
+                    margin-left: 10px;
                 }
             }
         }

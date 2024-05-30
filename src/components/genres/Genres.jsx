@@ -10,8 +10,7 @@ const Genres = ({ data }) => {
         <div className="genres">
             {data?.map((g) => {
                 const genreName = genres[g]?.name;
-                if (!genreName) return null; // Kategori adı bulunamadıysa render etme
-                // Kategori adını Türkçe karşılığı ile göster
+                if (!genreName) return null;
                 return (
                     <div key={g} className="genre">
                         {genreName}

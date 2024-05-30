@@ -2,11 +2,16 @@
     display: flex;
     gap: 5px;
     .genre {
-        background-color: var(--black);
-        padding: 3px 5px;
-        font-size: 12px;
-        border-radius: 4px;
+        background-color: rgb(37, 37, 37);
+        padding: 5px 5px;
+        font-size: 15px;
+        border-radius: 3px;
         color: white;
         white-space: nowrap;
+        cursor: pointer;
+        transition: 0.4;
+        &:hover{
+            scale: 1.2;
+        }
     }
 }

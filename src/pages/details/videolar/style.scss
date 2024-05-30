@@ -34,7 +34,7 @@
                     width: 100%;
                     display: block;
                     border-radius: 10px;
-                    transition: all 0.2s ease-in-out;
+                    transition: all 0.4s ease-in-out;
                     z-index: 99;
                 }
                 svg {
@@ -43,9 +43,8 @@
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
-                    width: 40px;
-                    height: 40px;
                     transition: 0.4s;
+                    transition: ease-in;
                 }
                 .triangle {
                     stroke-dasharray: 240;
@@ -65,19 +64,6 @@
                     }
                     img {
                         filter: blur(2.9px);
-                        transform: scale(0.9);
-                    }
-                    .triangle { 
-                        display: inline;
-                        stroke-dashoffset: 500;
-                        opacity: 1;
-                        stroke: var(--white);
-                        animation: trailorPlay 0.2s ease-in-out;
-                    }
-                    .circle {
-                        display: inline;
-                        stroke-dashoffset: 0;
-                        stroke: var(--white);
                     }
                 }
             }

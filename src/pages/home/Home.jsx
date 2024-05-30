@@ -7,7 +7,7 @@ import TrendFilmler from "./trendFilmler/trendfilmler";
 import Popular from "./popular/Popular";
 import TopRated from "./topRated/TopRated";
 import TrendDiziler from "./trendDiziler/trenddiziler";
-import EmmyWinners from "./emmyWinners/emmyWinners"
+import Lucky from "./lucky/lucky"
 import Oyuncular from "./oyuncular/oyuncular"
 
 
@@ -21,8 +21,8 @@ const Home = () => {
         <TrendDiziler />
         <Oyuncular/>
         <Popular />
+        <Lucky />
         <TopRated />
-      {/*  <EmmyWinners /> */}
         <div style={{ height: 1 }}></div>
   </div>
   );

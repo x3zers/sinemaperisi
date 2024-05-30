@@ -225,6 +225,7 @@ const DetailsBanner = ({ video, crew }) => {
                                         src={PosterFallback}
                                     />
                                 )}
+                                <Genres data={_genres} />
                             </div>
                             <div className="right">
                                 <div className="title">
@@ -232,9 +233,8 @@ const DetailsBanner = ({ video, crew }) => {
                                         data?.release_date
                                     ).format("YYYY")})`}
                                 </div>
-                                <div className="subtitle">"{data.tagline}"</div>
+                                <div className="subtitle">{data.tagline}</div>
 
-                                <Genres data={_genres} />
 
                                 <div className="row">
                                     <CircleRating
@@ -242,13 +242,16 @@ const DetailsBanner = ({ video, crew }) => {
                                     />
                                     <div
                                         className="playbtn"
-                                        onClick={openWatchLink}
+                                        onClick={() => {
+                                            setShow(true);
+                                            setVideoId(video.key);
+                                        }}
                                     >
                                         <PlayIcon />
                                         <span className="text">
-                                            İzle
+                                            Fragmanı İzle
                                             </span>
-                                            <span className="tooltip">Çıkan sitede izlemek istediğiniz içeriği izleyebilirsiniz.</span>
+                                            
                                     </div>
                                     <div
                                         className="logoBtn"
@@ -258,6 +261,7 @@ const DetailsBanner = ({ video, crew }) => {
                                         <span className="text">
                                             'da izle
                                         </span>
+                                        <span className="tooltip">Çıkan sitede izlemek istediğiniz içeriği izleyebilirsiniz.</span>
                                     </div>
                                 </div>
 
@@ -267,7 +271,7 @@ const DetailsBanner = ({ video, crew }) => {
                                         {data.overview}
                                     </div>
                                 </div>
-
+                                
                                 <div className="info">
                                     {data.status && (
                                         <div className="infoItem">
@@ -321,7 +325,7 @@ const DetailsBanner = ({ video, crew }) => {
                                         </span>
                                     </div>
                                 )}
-                                  <div
+                                 {/* <div
                                          className="fragman"
                                          onClick={() => {
                                              setShow(true);
@@ -331,7 +335,7 @@ const DetailsBanner = ({ video, crew }) => {
                                         <span className="fragman">
                                              Öne Çıkan Fragmanı İzle
                                         </span> 
-                                     </div> 
+                                        </div> */}
                                 {writer?.length > 0 && (
                                     <div className="info">
                                         <span className="text bold">
@@ -367,8 +371,7 @@ const DetailsBanner = ({ video, crew }) => {
                                             )}
                                         </span>
                                     </div>
-                                )}
-                                
+                                )} 
                                 {data?.$provider?.length > 0 && (
                                     <div className="info">
                                         <span className="text bold">
@@ -434,28 +437,24 @@ const DetailsBanner = ({ video, crew }) => {
                                                     <span>{socialMedia.tiktok_id}</span>
                                                     </a>
                                                 )}
-                                                 {socialMedia.imdb_id && (
+                                        </div>
+                                    </div>
+                                    
+                                )}
+                                 <div className="socialMediaIMDB">
+                                <div className="socialLinksIMDB">
+                                   {socialMedia.imdb_id && (
                                                     <a
                                                         href={`https://www.imdb.com/title/${socialMedia.imdb_id}/`}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
                                                     >
                                                     <svg xmlns="http://www.w3.org/2000/svg" aria-label="IMDb" role="img" viewBox="0 0 512 512" width="24px" height="24px" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><rect width="512" height="512" rx="15%" fill="#f5c518"></rect><path d="M104 328V184H64v144zM189 184l-9 67-5-36-5-31h-50v144h34v-95l14 95h25l13-97v97h34V184zM256 328V184h62c15 0 26 11 26 25v94c0 14-11 25-26 25zm47-118l-9-1v94c5 0 9-1 10-3 2-2 2-8 2-18v-56-12l-3-4zM419 220h3c14 0 26 11 26 25v58c0 14-12 25-26 25h-3c-8 0-16-4-21-11l-2 9h-36V184h38v46c5-6 13-10 21-10zm-8 70v-34l-1-11c-1-2-4-3-6-3s-5 1-6 3v57c1 2 4 3 6 3s6-1 6-3l1-12z"></path></g></svg>    
-                                                    <span>İçeriğin IMDB Sayfası</span>
+                                                     <span>İçerik Hakkında Daha Fazla Detay</span>
                                                     </a>
                                                 )}
-                                                 {socialMedia?.wikidata_id && (
-                                                    <a
-                                                        href={`https://tr.wikipedia.org/wiki/${socialMedia.wikidata_id}/`}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                    >
-                                                        <span>İçeriğin Wiki Sayfası</span>
-                                                    </a>
-                                                )}
-                                        </div>
+                                                  </div>
                                     </div>
-                                )}
                                 {data?.videos?.results.length > 0 && (
                                     <div className="info">
                                         <span className="text bold">

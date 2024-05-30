@@ -19,7 +19,7 @@ const HeroBanner = () => {
 
     useEffect(() => {
         if (data) {
-            const randomIndex = Math.floor(Math.random() * 20);
+            const randomIndex = Math.floor(Math.random() * 10);
             const selectedMovie = data?.results?.[randomIndex];
             const bg = url.backdrop + selectedMovie?.backdrop_path;
             setBackground(bg);
@@ -42,10 +42,8 @@ const HeroBanner = () => {
     return (
         <div className="heroBanner">
             {data && (
-                <div className="backdrop-img">
-                   <Link to={`/movie/${imageContent.id}`}> 
-                        <Img src={background} onClick={handleImageClick} />
-                    </Link> 
+                <div className="backdrop-img">   
+                        <Img src={background}/>
                 </div>
             )}
 

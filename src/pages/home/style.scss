@@ -3,7 +3,8 @@
     margin: 0 auto;
     max-width: 1200px;
     padding: 0px;
-    margin-bottom: 70px;
+    margin-bottom: 50px;
+    margin-top: 25px;
 }
 
 .carouselSection > .contentWrapper {
@@ -11,8 +12,8 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
-    overflow-x: auto; /* Yatay kaydırma ekleyin */
-    -webkit-overflow-scrolling: touch; /* iOS cihazlarında kaydırma düzgün çalışması için */
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; 
 }
 
 .carouselTitle {

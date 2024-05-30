@@ -13,7 +13,7 @@ import Yorumlar from "./yorumlar/yorumlar"
 
 const Details = () => {
     const { mediaType, id } = useParams();
-    let language = "tr,en"; // Varsayılan dil seçeneği Türkçe ve İngilizce olarak ayarlandı
+    let language = "tr"; // Varsayılan dil seçeneği Türkçe ve İngilizce olarak ayarlandı
 
     // Dil seçeneğini belirle
     if (navigator.language.startsWith("tr")) {
@@ -21,7 +21,7 @@ const Details = () => {
         language = "tr";
     }
 
-    const { data: videos, loading: videosLoading } = useFetch(`/${mediaType}/${id}/videos?language=${language}`);
+    const { data: videos, loading: videosLoading } = useFetch(`/${mediaType}/${id}/videos?language=tr`);
     const { data: credits, loading: creditsLoading } = useFetch(`/${mediaType}/${id}/credits`);
 
     return (
