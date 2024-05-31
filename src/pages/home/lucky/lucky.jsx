@@ -64,7 +64,9 @@ const LuckyButton = () => {
         <div className="luckyButtonContainer">
         <span className="refreshIcon" onClick={handleRefresh}>
             &#x21bb;
+            <span className="tooltip">Yenilemek için tıklayın</span>
         </span>
+        
             {backgroundImage && <img src={backgroundImage} alt="arkaplan" className="backgroundImage" />}
             <button className="luckyButton" onClick={handleBackgroundClick}>
                 Ne izleyeceğine karar veremedin mi?

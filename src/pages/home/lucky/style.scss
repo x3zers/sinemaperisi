@@ -21,6 +21,7 @@
     border-radius: 15px;
     z-index: -1;
     margin-bottom: 25px;
+    user-select: none;
 }
 
 .refreshIcon {
@@ -28,8 +29,36 @@
     top: 10px;
     left: 10px;
     font-size: 24px;
+    transition: transform 0.4s;
+    user-select: none;
     cursor: pointer;
 }
+
+.refreshIcon:active {
+    transform: rotate(360deg);
+}
+
+.refreshIcon:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.tooltip {
+    visibility: hidden;
+    opacity: 0;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 10px;
+    position: absolute;
+    z-index: 6;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: opacity 0.3s;
+}
+
 .luckyButton {
     position: relative;
     border: none;
@@ -41,12 +70,17 @@
     cursor: pointer;
     border-radius: 10px;
     background-color: transparent;
-    color: white;
-    font-weight: 200;
+    color: rgb(255, 255, 255);
     transition: 0.3s;
     margin-left: -30px;
+    transform: scale(1.3);
 }
-.imageContent3{
+
+.luckyButton:hover {
+    transform: scale(1.4);
+}
+
+.imageContent3 {
     display: flex;
     align-items: center;
     font-size: 16px;
@@ -59,7 +93,7 @@
     border-radius: 5px;
     bottom: 5px;
     transition: 0.3s;
-    cursor:copy;
+    user-select: none;
 }
 
 /* Küçük ekranlar için */
@@ -74,7 +108,7 @@
         font-size: 24px; /* Yazı boyutunu küçült */
     }
 
-    .luckyButtonText {
+    .imageContent3 {
         margin-top: 30px; /* Üst marjını azalt */
         font-size: 16px; /* Yazı boyutunu küçült */
     }
@@ -83,17 +117,13 @@
 /* Daha küçük ekranlar için */
 @media (max-width: 480px) {
     .backgroundImage {
-        left: 45%; /* Sol tarafa daha yakın yap */
-        width: 90%; /* Genişliği arttır */
+        left: -35%; /* Sol tarafa daha yakın yap */
+        width: 170%;
+        height: 50%;
     }
 
     .luckyButton {
-        padding: 20px; /* Padding'i daha da azalt */
-        font-size: 18px; /* Yazı boyutunu küçült */
-    }
-
-    .luckyButtonText {
-        margin-top: 20px; /* Üst marjını daha da azalt */
-        font-size: 14px; /* Yazı boyutunu küçült */
+        padding: 150px; /* Padding'i daha da azalt */
+        font-size: 15px; /* Yazı boyutunu küçült */
     }
 }

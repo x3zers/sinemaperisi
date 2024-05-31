@@ -10,25 +10,28 @@ import Similar from "./carousels/Similar";
 import Recommendation from "./carousels/Recommendation";
 import Justwatch from "./justwatch/justwatch"
 import Yorumlar from "./yorumlar/yorumlar"
+import Images from "./images/images"
+import ImagesTV from "./images/imagestv"
+
 
 const Details = () => {
     const { mediaType, id } = useParams();
-    let language = "tr"; // Varsayılan dil seçeneği Türkçe ve İngilizce olarak ayarlandı
+    let language = "tr";
 
-    // Dil seçeneğini belirle
     if (navigator.language.startsWith("tr")) {
-        // Eğer kullanıcının tarayıcısı Türkçe ise
         language = "tr";
     }
 
     const { data: videos, loading: videosLoading } = useFetch(`/${mediaType}/${id}/videos?language=tr`);
     const { data: credits, loading: creditsLoading } = useFetch(`/${mediaType}/${id}/credits`);
+    const ImagesComponent = mediaType === "tv" ? ImagesTV : Images;
 
     return (
         <div>
             <DetailsBanner video={videos?.results?.[0]} crew={credits?.crew} />
             <Cast data={credits?.cast} loading={creditsLoading} />
             <Videolar data={videos} loading={videosLoading} /> 
+            <ImagesComponent data={videos} loading={videosLoading} /> 
             <Justwatch data={videos} loading={videosLoading} /> 
             <Recommendation mediaType={mediaType} id={id} />
             <Similar mediaType={mediaType} id={id} />
