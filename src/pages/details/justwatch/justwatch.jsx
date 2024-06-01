@@ -7,7 +7,7 @@ const DetailsPage = () => {
     const { mediaType, id } = useParams();
     const [watchProviders, setWatchProviders] = useState(null);
     const [error, setError] = useState(null);
-    const apikey = "50b3c6dbb79aad9abebce47ea739e62d";
+    const apikey = "095262b2872d2235d6da623056c10cd9";
 
       const determineMediaType = () => {
         // mediaType parametresine göre içeriğin türünü belirle

@@ -12,7 +12,8 @@ import Justwatch from "./justwatch/justwatch"
 import Yorumlar from "./yorumlar/yorumlar"
 import Images from "./images/images"
 import ImagesTV from "./images/imagestv"
-
+import Fragmanlar from "./fragmanlar/fragmanlar"
+import Sirketler from "./sirketler/sirketler"
 
 const Details = () => {
     const { mediaType, id } = useParams();
@@ -30,9 +31,11 @@ const Details = () => {
         <div>
             <DetailsBanner video={videos?.results?.[0]} crew={credits?.crew} />
             <Cast data={credits?.cast} loading={creditsLoading} />
+            <Fragmanlar data={videos} loading={videosLoading} /> 
             <Videolar data={videos} loading={videosLoading} /> 
             <ImagesComponent data={videos} loading={videosLoading} /> 
             <Justwatch data={videos} loading={videosLoading} /> 
+            <Sirketler mediaType={mediaType} id={id} />
             <Recommendation mediaType={mediaType} id={id} />
             <Similar mediaType={mediaType} id={id} />
             <Yorumlar mediaType={mediaType} id={id} />

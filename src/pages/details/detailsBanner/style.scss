@@ -433,3 +433,28 @@
         }
     }
 }
+.infoItem2 {
+    .text {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding-top: 10px;
+
+        .companyLogo {
+            width: 100px; /* Tüm logoların genişliği */
+            margin-right: 10px;
+            border-radius: 8px; /* Kenarları yuvarlak yapmak için */
+            background-color: #f0f0f0; /* Arka plan rengi */
+            transition: transform 0.3s ease; /* Hover efekti için geçiş efekti */
+            cursor: pointer; /* Fareyi üstüne getirildiğinde imlecin el işareti olması */
+
+            &:hover {
+                transform: scale(1.1); /* Üzerine gelindiğinde büyütme efekti */
+            }
+        }
+
+        .companyName {
+            font-weight: bold;
+        }
+    }
+}

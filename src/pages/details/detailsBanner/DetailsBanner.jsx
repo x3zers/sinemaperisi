@@ -23,30 +23,7 @@ const DetailsBanner = ({ video, crew }) => {
     const { mediaType, id } = useParams();
     const { data, loading } = useFetch(`/${mediaType}/${id}`);
     const { url } = useSelector((state) => state.home);
-
-    async function getWikiPageTitleById(wikidataId) {
-        try {
-            const response = await axios.get('https://www.wikidata.org/w/api.php', {
-                params: {
-                    action: 'wbgetentities',
-                    ids: wikidataId,
-                    format: 'json'
-                }
-            });
     
-            const entities = response.data.entities;
-            const entity = entities[wikidataId];
-            if (entity && entity.sitelinks && entity.sitelinks.trwiki) {
-                return entity.sitelinks.trwiki.title;
-            } else {
-                throw new Error('Page title not found');
-            }
-        } catch (error) {
-            console.error('Error fetching Wikipedia page title:', error);
-            return null;
-        }
-    }
-
     const determineMediaType = () => {
         if (mediaType === "movie") {
             return "movie";
@@ -76,38 +53,6 @@ const DetailsBanner = ({ video, crew }) => {
         fetchSocialMedia();
     
     }, [id, mediaType]);
-
-    useEffect(() => {
-        if (socialMedia && socialMedia.wikidata_id) {
-            getWikiPageTitleById(socialMedia.wikidata_id).then(title => {
-                console.log("Wikipedia Sayfa Başlığı:", title); 
-            }).catch(error => {
-                console.error("Wikipedia sayfa başlığı alınamadı:", error);
-            });
-        }
-    }, [socialMedia]);
-    
-    useEffect(() => {
-        const fetchWatchProviders = async () => {
-            try {
-                const mediaType = determineMediaType();
-                const response = await fetch(`https://api.themoviedb.org/3/${mediaType}/${id}/watch/providers?api_key=${apikey}`);
-                if (!response.ok) {
-                    throw new Error("Watch providers could not be fetched.");
-                }
-                const data = await response.json();
-                setWatchProviders(data);
-            } catch (error) {
-                console.error("Error fetching watch providers:", error);
-                setError(error.message);
-            }
-        };
-
-        if (mediaType && id) {
-            fetchWatchProviders();
-        }
-    }, [mediaType, id]);
-
 
     useEffect(() => {
         const fetchSocialMedia = async () => {
@@ -225,7 +170,7 @@ const DetailsBanner = ({ video, crew }) => {
                                         src={PosterFallback}
                                     />
                                 )}
-                                <Genres data={_genres} />
+                                <Genres data={_genres} />                
                             </div>
                             <div className="right">
                                 <div className="title">
@@ -470,7 +415,6 @@ const DetailsBanner = ({ video, crew }) => {
                                         ></iframe>
                                     </div>
                                 )}
-                                
                             </div>
                         </div>
                         <VideoPopup

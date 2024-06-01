@@ -76,10 +76,6 @@
     transform: scale(1.3);
 }
 
-.luckyButton:hover {
-    transform: scale(1.4);
-}
-
 .imageContent3 {
     display: flex;
     align-items: center;
@@ -94,36 +90,53 @@
     bottom: 5px;
     transition: 0.3s;
     user-select: none;
+    &:active{
+        visibility: hidden;
+    }
 }
 
 /* Küçük ekranlar için */
 @media (max-width: 768px) {
     .backgroundImage {
-        left: 50%; /* Sol tarafa daha yakın yap */
-        width: 80%; /* Genişliği arttır */
+        left: 50%;
+        width: 80%;
     }
 
     .luckyButton {
-        padding: 30px; /* Padding'i azalt */
-        font-size: 24px; /* Yazı boyutunu küçült */
+        padding: 30px;
+        font-size: 24px;
     }
 
     .imageContent3 {
-        margin-top: 30px; /* Üst marjını azalt */
-        font-size: 16px; /* Yazı boyutunu küçült */
+        margin-top: 30px;
+        font-size: 16px;
     }
 }
 
 /* Daha küçük ekranlar için */
 @media (max-width: 480px) {
+    .luckyButtonContainer {
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Arka plan rengini daha şeffaf yap */
+        padding: 10px;
+    }
+
     .backgroundImage {
-        left: -35%; /* Sol tarafa daha yakın yap */
-        width: 170%;
-        height: 50%;
+        left: 0;
+        width: 100%;
+        height: 100%;
     }
 
     .luckyButton {
-        padding: 150px; /* Padding'i daha da azalt */
-        font-size: 15px; /* Yazı boyutunu küçült */
+        padding: 40px;
+        font-size: 18px;
+    }
+
+    .imageContent3 {
+        visibility: hidden;
+    }
+    .refreshIcon {
+        visibility: hidden;
     }
 }

@@ -1,0 +1,93 @@
+.reviewsPage {
+    padding: 20px;
+    min-height: 100vh;
+
+    .sectionHeading {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #ffffff;
+        margin-bottom: 20px;
+    }
+
+    .reviewList {
+        list-style: none;
+        padding: 0;
+
+        .reviewItem {
+            background-color: #242424;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            transition: 0.3s;
+
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                background-color: rgb(10, 10, 10);
+            }
+
+            .author {
+                font-size: 1.2rem;
+                font-weight: 500;
+                color: #ffffff;
+                margin-bottom: 10px;
+                display: flex;
+                align-items: center;
+                transition: 0.3s;
+                &:hover{
+                    font-weight: 600;
+                }
+                &::before {
+                    content: '';
+                    display: inline-block;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    background-color: #ffffff;
+                    margin-right: 10px;
+                    background-image: url('https://cdn.discordapp.com/attachments/1243857760425345126/1246424105679589416/image.png?ex=665c5668&is=665b04e8&hm=54fc19644c68e1b74246fca5e017f8237661500a16af390241872b2cc6c911fe&');
+                    background-size: cover;
+                    background-position: center;
+                }
+            }
+
+            .content {
+                font-size: 1rem;
+                color: #ffffff;
+                line-height: 1.6;
+            }
+        }
+    }
+
+    .loading, .noReviews {
+        font-size: 1.5rem;
+        color: #999;
+    }
+
+    .loadMoreButton {
+        display: block;
+        width: 200px;
+        margin: 20px auto;
+        padding: 10px 20px;
+        background-color: #363636;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+
+        &:hover {
+            background-color: #ffffff;
+            transform: translateY(-3px);
+            color: black;
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+    }
+}
